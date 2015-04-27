@@ -210,6 +210,11 @@ namespace Data_Structure_Simulator
                     }
                 }
             }
+        //.........................................Delete Node Button................................................//
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+
+        }
         //.........................................Paint Event.................................................//
         private void tabPageSimulation_Paint(object sender, PaintEventArgs e)
         {
@@ -248,5 +253,7 @@ namespace Data_Structure_Simulator
         {
 
         }
+
+       
     }
 }

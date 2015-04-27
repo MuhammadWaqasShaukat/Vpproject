@@ -29,3 +29,6 @@ F:\Repository\Data Structure Simulator\Data Structure Simulator\obj\Debug\Data_S
 F:\Repository\Data Structure Simulator\Data Structure Simulator\obj\Debug\Data_Structure_Simulator.Properties.Resources.resources
 F:\Repository\Data Structure Simulator\Data Structure Simulator\obj\Debug\Data_Structure_Simulator.Settings.resources
 F:\Repository\Data Structure Simulator\Data Structure Simulator\obj\Debug\Data Structure Simulator.csproj.GenerateResource.Cache
+C:\Users\Raja\Documents\GitHub\Vpproject\Data Structure Simulator\Data Structure Simulator\bin\Debug\Data Structure Simulator.exe.config
+C:\Users\Raja\Documents\GitHub\Vpproject\Data Structure Simulator\Data Structure Simulator\obj\Debug\Data Structure Simulator.exe
+C:\Users\Raja\Documents\GitHub\Vpproject\Data Structure Simulator\Data Structure Simulator\obj\Debug\Data Structure Simulator.pdb
