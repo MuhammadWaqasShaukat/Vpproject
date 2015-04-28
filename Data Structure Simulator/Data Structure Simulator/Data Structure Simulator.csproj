@@ -60,7 +60,9 @@
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
     <Compile Include="stackImplentaion.cs" />
-    <Compile Include="treeImplentaion.cs" />
+    <Compile Include="treeImplentaion.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <EmbeddedResource Include="dataStructureSimulator.resx">
       <DependentUpon>dataStructureSimulator.cs</DependentUpon>
     </EmbeddedResource>
@@ -72,6 +74,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
@@ -88,6 +91,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Home.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\newFile.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\File.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download %281%29.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

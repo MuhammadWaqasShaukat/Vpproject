@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 namespace Data_Structure_Simulator
 {
-    public delegate void treeDelegate(string value);
     public partial class dataStructureSimulator : Form
     {
         //.................................Node................................................//
@@ -168,7 +167,8 @@ namespace Data_Structure_Simulator
             }
             catch
             {
-                MessageBox.Show("Please Enter Integer In textBox", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                labelOnlyInteger.Text = "Only Integers Are Allowed".ToString();
+                textBoxForInput.Clear();
             }
         }
         //........................................Find Button Method.............................//
@@ -235,7 +235,8 @@ namespace Data_Structure_Simulator
         public void SearchDrawShape(int x, int y)
         {
             Graphics g = tabPageSimulation.CreateGraphics();
-            g.DrawEllipse(Pens.Red, x, y, 27, 27);
+            Pen p = new Pen(Brushes.Red,5);
+            g.DrawEllipse(p, x, y, 28, 29);
         }
         //............................................Draw Edge.............................................//
         public void DrawEdge(int x1,int y1,int x2,int y2)
