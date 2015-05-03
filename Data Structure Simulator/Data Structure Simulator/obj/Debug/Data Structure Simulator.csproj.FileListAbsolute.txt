@@ -37,5 +37,13 @@ C:\Users\Raja\Documents\GitHub\Vpproject\Data Structure Simulator\Data Structure
 C:\Users\Raja\Documents\GitHub\Vpproject\Data Structure Simulator\Data Structure Simulator\obj\Debug\Data Structure Simulator.csprojResolveAssemblyReference.cache
 C:\Users\Raja\Documents\GitHub\Vpproject\Data Structure Simulator\Data Structure Simulator\obj\Debug\Data_Structure_Simulator.dataStructureSimulator.resources
 C:\Users\Raja\Documents\GitHub\Vpproject\Data Structure Simulator\Data Structure Simulator\obj\Debug\Data_Structure_Simulator.Properties.Resources.resources
-C:\Users\Raja\Documents\GitHub\Vpproject\Data Structure Simulator\Data Structure Simulator\obj\Debug\Data_Structure_Simulator.Settings.resources
 C:\Users\Raja\Documents\GitHub\Vpproject\Data Structure Simulator\Data Structure Simulator\obj\Debug\Data Structure Simulator.csproj.GenerateResource.Cache
+C:\Users\Raja\Desktop\Vpproject-master\Data Structure Simulator\Data Structure Simulator\bin\Debug\Data Structure Simulator.exe.config
+C:\Users\Raja\Desktop\Vpproject-master\Data Structure Simulator\Data Structure Simulator\obj\Debug\Data Structure Simulator.exe
+C:\Users\Raja\Desktop\Vpproject-master\Data Structure Simulator\Data Structure Simulator\obj\Debug\Data Structure Simulator.pdb
+C:\Users\Raja\Desktop\Vpproject-master\Data Structure Simulator\Data Structure Simulator\bin\Debug\Data Structure Simulator.exe
+C:\Users\Raja\Desktop\Vpproject-master\Data Structure Simulator\Data Structure Simulator\bin\Debug\Data Structure Simulator.pdb
+C:\Users\Raja\Desktop\Vpproject-master\Data Structure Simulator\Data Structure Simulator\obj\Debug\Data Structure Simulator.csprojResolveAssemblyReference.cache
+C:\Users\Raja\Desktop\Vpproject-master\Data Structure Simulator\Data Structure Simulator\obj\Debug\Data_Structure_Simulator.dataStructureSimulator.resources
+C:\Users\Raja\Desktop\Vpproject-master\Data Structure Simulator\Data Structure Simulator\obj\Debug\Data_Structure_Simulator.Properties.Resources.resources
+C:\Users\Raja\Desktop\Vpproject-master\Data Structure Simulator\Data Structure Simulator\obj\Debug\Data Structure Simulator.csproj.GenerateResource.Cache

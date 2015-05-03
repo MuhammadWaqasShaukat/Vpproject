@@ -21,44 +21,73 @@ namespace Data_Structure_Simulator
             public int level;
             public int x_axis;
             public int y_axis;
-            public int line_x, line_y;
-            public node(int value, int x, int y)
+            public int startLineX, startLineY, endLineX, endLineY;
+            //................................Initial Constructor..........................//
+            public node(int value)
+            {
+
+            }
+
+            //............................Constructor For Tree ............................//
+            public node(int value, int x_axis, int y_axis, int startLineX, int startLineY, int endLineX, int endLineY)
             {
                 this.value = value;
                 left = null;
                 right = null;
-                x_axis = x;
-                y_axis = y;
+                this.x_axis = x_axis;
+                this.y_axis = y_axis;
+                this.startLineX = startLineX;
+                this.startLineY = startLineY;
+                this.endLineX = endLineX;
+                this.endLineY = endLineY;
             }
+            //..........................Constructor For Stack.............................//
+            public node(int value, int x_axis,int y_axis)
+            {
+                this.value = value;
+                left = null;  // next would be used as next 
+                this.x_axis = x_axis;
+                this.y_axis = y_axis;               
+            }
+            //........................Constructor for Linked List...........................//
         }
         node top = null;
-                public int width, height, x_axisShape, y_axisShape,initialX,initialY;
+        public int width;
+        public int height;
+        public int x_axisShape;
+        public int y_axisShape;
+        public int initialX, initialY, finalX, finalY;//edge;
+        Graphics graphics;
+        Brush brush;
+        Pen pen;
+        Bitmap image;
+        Font font;
         //.................................................................................//
         public dataStructureSimulator()
         {
             InitializeComponent();
-         }
+        }
 
         //...........................radio Buttons.........................................//
-       private void radioButtonStack_CheckedChanged(object sender, EventArgs e)
+        private void radioButtonStack_CheckedChanged(object sender, EventArgs e)
         {
-                dataStructureUsed.Text = radioButtonStack.Text.ToString();
-                groupBoxInput.Show();
-                groupBoxOptionsStack.Show(); 
+            dataStructureUsed.Text = radioButtonStack.Text.ToString();
+            groupBoxInput.Show();
+            groupBoxOptionsStack.Show();
         }
 
         private void radioButtonLinkedList_CheckedChanged(object sender, EventArgs e)
         {
-                dataStructureUsed.Text = radioButtonLinkedList.Text.ToString();
-                groupBoxInput.Show();
-                groupBoxOptionsLinkedList.Show();
+            dataStructureUsed.Text = radioButtonLinkedList.Text.ToString();
+            groupBoxInput.Show();
+            groupBoxOptionsLinkedList.Show();
         }
 
         private void radioButtonTree_CheckedChanged(object sender, EventArgs e)
         {
-                dataStructureUsed.Text = radioButtonTree.Text.ToString();
-                groupBoxInput.Show();
-                groupBoxOptionsTree.Show();
+            dataStructureUsed.Text = radioButtonTree.Text.ToString();
+            groupBoxInput.Show();
+            groupBoxOptionsTree.Show();
         }
         //.............................Group Box DataStructures................................//
         private void groupBoxDataStructure_Enter(object sender, EventArgs e)
@@ -69,9 +98,9 @@ namespace Data_Structure_Simulator
             }
             if (radioButtonStack.Checked == true)
                 radioButtonStack_CheckedChanged(sender, e);
-            else if(radioButtonLinkedList.Checked==true)
+            else if (radioButtonLinkedList.Checked == true)
                 radioButtonLinkedList_CheckedChanged(sender, e);
-            else if(radioButtonTree.Checked==true)
+            else if (radioButtonTree.Checked == true)
                 radioButtonTree_CheckedChanged(sender, e);
         }
         //...............................Menu Strip...........................................//
@@ -80,11 +109,7 @@ namespace Data_Structure_Simulator
             groupBoxDataStructure.Show();
             groupBoxDataStructure_Enter(sender, e);
         }
-        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Settings setting = new Settings();
-            setting.Show();
-        }
+
         private void newToolStripMenuItem_Click_1(object sender, EventArgs e)// Selecting New DataStructure
         {
 
@@ -100,8 +125,130 @@ namespace Data_Structure_Simulator
                 top = null;
             }
         }
+        //...........................................Stack Options............................//
+        //........................................... Push............................//
+        private void buttonPush_Click(object sender, EventArgs e)
+        {
+            bool added = false;
+            try
+            {
+                x_axisShape = tabPageSimulation.Width / 2;
+                int number = Int32.Parse(textBoxForInput.Text);
+                if (top == null)
+                {
+                    y_axisShape = tabPageSimulation.Height - 100;
+                    node newNode = new node(number, x_axisShape, y_axisShape);
+                    draw(ref newNode);
+                    top = newNode;
+                    drawTop(ref newNode);
+                    return;
+                }
+                node current = top;
+                do
+                {
+                    if (current.left == null)
+                    {
+                        y_axisShape = current.y_axis - 50;
+                        node newNode = new node(number, x_axisShape, y_axisShape);
+                        current.left = newNode;
+                        draw(ref newNode);
+                        tabPageSimulation.Refresh();
+                        repaintStack();
+                        drawTop(ref newNode);
+                        added = true;
+                    }
+                    else
+                    {
+                        current = current.left;
+                    }
+                } while (!added);
+            }
+            catch
+            {
+                MessageBox.Show("Some thing went Wrong");
+            }
+        }
+       //...........................................pop............................//
+        private void buttonPop_Click(object sender, EventArgs e)
+        {
+            pop();
+            tabPageSimulation.Refresh();
+            repaintStack();  
+        } 
+        private void pop()
+        {
+            try
+            {
+                if (top == null)
+                {
+                    MessageBox.Show("Stack is Empty Stop Poping");
+                }
+                else if (top.left == null)
+                {
+                    top = null;
+                    return;
+                }
+                else
+                {
+                    node prev = top;
+                    node current = top.left;
+                    while (current.left != null)
+                    {
+                        prev = current;
+                        current = current.left;
+                    }
+                    prev.left = null;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Top is Now Null");
+            }
+           }
+        
+        public void draw(ref node current)
+        {
+            graphics = tabPageSimulation.CreateGraphics();
+            pen = new Pen(Brushes.Red, 5);
+            Font font = new Font("Arial", 12);
+            Brush b = new SolidBrush(Color.Blue);
+            graphics.DrawString(current.value.ToString(), font, b, current.x_axis+30, current.y_axis+20);
+            graphics.DrawRectangle(pen, current.x_axis, current.y_axis, 100, 50);
+         //   drawTop(ref current);
+        }
+        public void drawTop(ref node current)
+        {   
+            graphics = tabPageSimulation.CreateGraphics();
+            brush = new SolidBrush(Color.Blue);
+            pen = new Pen(brush, 4);
+            pen.EndCap = LineCap.ArrowAnchor;
+            font = new Font("Arial", 12);
+            string text = "Top";
+            var point1 = new Point(current.x_axis -60, current.y_axis+20);
+            var point2 = new Point(current.x_axis, current.y_axis +20);
+            graphics.DrawString(text, font, brush, current.x_axis-100, current.y_axis+10);
+            graphics.DrawLine(pen, point1, point2);
+        }
+        private void repaintStack()
+        {
+           node N = top;
+           while(N!=null)      
+            {
+               draw(ref N);
+               N = N.left;
+            }
+        }
         //...........................................Linked List Options............................//
         private void buttonAdd_Click(object sender, EventArgs e)
+        {
+             
+        }
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonRemove_Click(object sender, EventArgs e)
         {
 
         }
@@ -110,7 +257,7 @@ namespace Data_Structure_Simulator
         private void buttonInsert_Click(object sender, EventArgs e)
         {
             try
-            {
+            { 
                 node N;
                 N = top;
                 int number = Int32.Parse(textBoxForInput.Text);
@@ -118,8 +265,13 @@ namespace Data_Structure_Simulator
                 {
                     x_axisShape = tabPageSimulation.Width / 2;
                     y_axisShape = 0;
-                    node newNode = new node(number, x_axisShape, y_axisShape);
+                    initialX = 0;
+                    initialY = 0;
+                    finalX = 0;
+                    finalY = 0;
+                    node newNode = new node(number, x_axisShape, y_axisShape, initialX, initialY, finalX, finalY);
                     DrawShape(number, x_axisShape, y_axisShape);
+
                     top = newNode;
                     return;
                 }
@@ -134,8 +286,12 @@ namespace Data_Structure_Simulator
 
                             x_axisShape = currentNode.x_axis - 50;
                             y_axisShape = currentNode.y_axis + 50;
-                            DrawEdge(currentNode.x_axis + 5, currentNode.y_axis + 20, x_axisShape + 20, y_axisShape + 5);
-                            node newNode = new node(number, x_axisShape, y_axisShape);
+                            initialX = currentNode.x_axis + 5;
+                            initialY = currentNode.y_axis + 20;
+                            finalX = x_axisShape + 20;
+                            finalY = y_axisShape + 5;
+                            node newNode = new node(number, x_axisShape, y_axisShape, initialX, initialY, finalX, finalY);
+                            DrawEdge(initialX, initialY, finalX, finalY);
                             DrawShape(number, x_axisShape, y_axisShape);
                             currentNode.left = newNode;
                             added = true;
@@ -151,8 +307,12 @@ namespace Data_Structure_Simulator
                         {
                             x_axisShape = currentNode.x_axis + 50;
                             y_axisShape = currentNode.y_axis + 50;
-                            DrawEdge(currentNode.x_axis + 20, currentNode.y_axis + 20, x_axisShape + 5, y_axisShape + 5);
-                            node newNode = new node(number, x_axisShape, y_axisShape);
+                            initialX = currentNode.x_axis + 20;
+                            initialY = currentNode.y_axis + 20;
+                            finalX = x_axisShape + 5;
+                            finalY = y_axisShape + 5;
+                            node newNode = new node(number, x_axisShape, y_axisShape, initialX, initialY, finalX, finalY);
+                            DrawEdge(initialX, initialY, finalX, finalY);
                             DrawShape(number, x_axisShape, y_axisShape);
                             currentNode.right = newNode;
                             added = true;
@@ -163,7 +323,7 @@ namespace Data_Structure_Simulator
                         }
                     }
                 } while (!added);
-                
+
             }
             catch
             {
@@ -189,27 +349,27 @@ namespace Data_Structure_Simulator
                 MessageBox.Show("Not Found");
             }
         }
-        private void searchNodeInTree(ref node N,int value)
+        private void searchNodeInTree(ref node N, int value)
+        {
+            if (N.value == value)
             {
-                if (N.value == value)
+                SearchDrawShape(N.x_axis, N.y_axis);
+                return;
+            }
+            else
+            {
+                if (value < N.value)
                 {
-                    SearchDrawShape(N.x_axis,N.y_axis);
+                    searchNodeInTree(ref N.left, value);
                     return;
                 }
-                else
+                if (value >= N.value)
                 {
-                    if (value < N.value)
-                    {
-                        searchNodeInTree(ref N.left, value);
-                        return;
-                    }
-                    if (value >= N.value)
-                    {
-                        searchNodeInTree(ref N.right, value);
-                        return;
-                    }
+                    searchNodeInTree(ref N.right, value);
+                    return;
                 }
             }
+        }
         //.........................................Delete Node Button................................................//
         private void buttonDelete_Click(object sender, EventArgs e)
         {
@@ -218,43 +378,84 @@ namespace Data_Structure_Simulator
         //.........................................Paint Event.................................................//
         private void tabPageSimulation_Paint(object sender, PaintEventArgs e)
         {
-          
-           
+
+
         }
         //.........................................Creating Graphics.........................................//
         public void DrawShape(int num, int x, int y)
         {
-            Graphics g = tabPageSimulation.CreateGraphics();
-            Brush b = new SolidBrush(Color.Blue);
-            Pen p = new Pen(b, 4);
+            graphics = tabPageSimulation.CreateGraphics();
+            brush = new SolidBrush(Color.Blue);
+            pen = new Pen(brush, 4);
             Font font = new Font("Arial", 12);
-            g.DrawString(num.ToString(), font, b , x+5 ,y+4);
-            g.DrawEllipse(p,x,y,26,26);
+            graphics.DrawString(num.ToString(), font, brush, x + 5, y + 4);
+            graphics.DrawEllipse(pen, x, y, 26, 26);
         }
         //...........................................Search Node Draw.......................................//
         public void SearchDrawShape(int x, int y)
         {
-            Graphics g = tabPageSimulation.CreateGraphics();
-            Pen p = new Pen(Brushes.Red,5);
-            g.DrawEllipse(p, x, y, 28, 29);
+            graphics = Graphics.FromImage(image);
+            graphics = tabPageSimulation.CreateGraphics();
+            pen = new Pen(Brushes.Red, 5);
+            graphics.DrawEllipse(pen, x, y, 28, 29);
         }
         //............................................Draw Edge.............................................//
-        public void DrawEdge(int x1,int y1,int x2,int y2)
+        public void DrawEdge(int x1, int y1, int x2, int y2)
         {
+            graphics = Graphics.FromImage(image);
             var point1 = new Point(x1, y1);
             var point2 = new Point(x2, y2);
-            Graphics g = tabPageSimulation.CreateGraphics();
-            Brush b = new SolidBrush(Color.Blue);
-            Pen p = new Pen(b, 4);
-            p.EndCap = LineCap.ArrowAnchor;
-            g.DrawLine(p,point1,point2);
+            graphics = tabPageSimulation.CreateGraphics();
+            brush = new SolidBrush(Color.Blue);
+            pen = new Pen(brush, 4);
+            pen.EndCap = LineCap.ArrowAnchor;
+            graphics.DrawLine(pen, point1, point2);
         }
 
-        private void textBoxForInput_TextChanged(object sender, EventArgs e)
+        private void dataStructureSimulator_Load(object sender, EventArgs e)
+        {
+            image = new Bitmap(tabControlDsSimulator.ClientSize.Width, tabControlDsSimulator.ClientSize.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            if(radioButtonTree .Checked==true)
+            repaintTree(ref top);
+            if (radioButtonStack.Checked == true)
+            repaintStack();
+            
+        }
+        private void repaintTree(ref node root)
+        {
+            if (root != null)
+            {
+                DrawEdge(root.startLineX, root.startLineY, root.endLineX, root.endLineY);
+                DrawShape(root.value, root.x_axis, root.y_axis);
+                repaintTree(ref root.left);
+                repaintTree(ref root.right);
+            }
+            else return;
+
+        }
+
+        private void vScrollBarSimulator_Scroll(object sender, ScrollEventArgs e)
         {
 
         }
 
-       
+        private void tabPageSimulation_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPageSimulation_Scroll(object sender, ScrollEventArgs e)
+        {
+           
+        }
+
+
+
+     
     }
 }

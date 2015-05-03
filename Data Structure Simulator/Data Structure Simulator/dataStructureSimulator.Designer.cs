@@ -65,11 +65,13 @@
             this.hScrollBarSimulator = new System.Windows.Forms.HScrollBar();
             this.vScrollBarSimulator = new System.Windows.Forms.VScrollBar();
             this.tabPageCodeView = new System.Windows.Forms.TabPage();
+            this.groupBoxSettings = new System.Windows.Forms.GroupBox();
+            this.canvasColor = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.labelOnlyInteger = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.dataStructureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.labelOnlyInteger = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -85,6 +87,7 @@
             this.splitContainer.SuspendLayout();
             this.tabControlDsSimulator.SuspendLayout();
             this.tabPageSimulation.SuspendLayout();
+            this.groupBoxSettings.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -143,7 +146,6 @@
             this.textBoxForInput.Name = "textBoxForInput";
             this.textBoxForInput.Size = new System.Drawing.Size(100, 20);
             this.textBoxForInput.TabIndex = 12;
-            this.textBoxForInput.TextChanged += new System.EventHandler(this.textBoxForInput_TextChanged);
             // 
             // dataStructureUsed
             // 
@@ -172,7 +174,7 @@
             this.groupBoxOptionsTree.Controls.Add(this.buttonDelete);
             this.groupBoxOptionsTree.Controls.Add(this.buttonFind);
             this.groupBoxOptionsTree.Controls.Add(this.buttonInsert);
-            this.groupBoxOptionsTree.Location = new System.Drawing.Point(6, 115);
+            this.groupBoxOptionsTree.Location = new System.Drawing.Point(5, 109);
             this.groupBoxOptionsTree.Name = "groupBoxOptionsTree";
             this.groupBoxOptionsTree.Size = new System.Drawing.Size(193, 100);
             this.groupBoxOptionsTree.TabIndex = 0;
@@ -240,7 +242,7 @@
             this.groupBoxOptionsLinkedList.Controls.Add(this.radioButtonAddAtStart);
             this.groupBoxOptionsLinkedList.Controls.Add(this.buttonRemove);
             this.groupBoxOptionsLinkedList.Controls.Add(this.buttonAdd);
-            this.groupBoxOptionsLinkedList.Location = new System.Drawing.Point(6, 115);
+            this.groupBoxOptionsLinkedList.Location = new System.Drawing.Point(5, 115);
             this.groupBoxOptionsLinkedList.Name = "groupBoxOptionsLinkedList";
             this.groupBoxOptionsLinkedList.Size = new System.Drawing.Size(193, 163);
             this.groupBoxOptionsLinkedList.TabIndex = 4;
@@ -274,6 +276,7 @@
             this.buttonSearch.TabIndex = 6;
             this.buttonSearch.Text = "Search";
             this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
             // textBoxAddAfter
             // 
@@ -323,6 +326,7 @@
             this.buttonRemove.TabIndex = 1;
             this.buttonRemove.Text = "Remove";
             this.buttonRemove.UseVisualStyleBackColor = true;
+            this.buttonRemove.Click += new System.EventHandler(this.buttonRemove_Click);
             // 
             // buttonAdd
             // 
@@ -361,6 +365,7 @@
             this.buttonPop.TabIndex = 3;
             this.buttonPop.Text = "Pop";
             this.buttonPop.UseVisualStyleBackColor = true;
+            this.buttonPop.Click += new System.EventHandler(this.buttonPop_Click);
             // 
             // buttonPush
             // 
@@ -371,6 +376,7 @@
             this.buttonPush.TabIndex = 2;
             this.buttonPush.Text = "Push";
             this.buttonPush.UseVisualStyleBackColor = true;
+            this.buttonPush.Click += new System.EventHandler(this.buttonPush_Click);
             // 
             // topValue
             // 
@@ -455,6 +461,7 @@
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.BackColor = System.Drawing.Color.GhostWhite;
+            this.splitContainer.Panel2.Controls.Add(this.groupBoxSettings);
             this.splitContainer.Panel2.Controls.Add(this.labelOnlyInteger);
             this.splitContainer.Size = new System.Drawing.Size(375, 437);
             this.splitContainer.SplitterDistance = 306;
@@ -473,7 +480,8 @@
             // 
             // tabPageSimulation
             // 
-            this.tabPageSimulation.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabPageSimulation.AutoScroll = true;
+            this.tabPageSimulation.BackColor = System.Drawing.Color.White;
             this.tabPageSimulation.Controls.Add(this.hScrollBarSimulator);
             this.tabPageSimulation.Controls.Add(this.vScrollBarSimulator);
             this.tabPageSimulation.Location = new System.Drawing.Point(4, 22);
@@ -483,25 +491,28 @@
             this.tabPageSimulation.TabIndex = 0;
             this.tabPageSimulation.Text = "Simulation";
             this.tabPageSimulation.ToolTipText = "View The Graphics Representaion Of The Selected Data Structure ";
+            this.tabPageSimulation.Scroll += new System.Windows.Forms.ScrollEventHandler(this.tabPageSimulation_Scroll);
+            this.tabPageSimulation.Click += new System.EventHandler(this.tabPageSimulation_Click);
             this.tabPageSimulation.Paint += new System.Windows.Forms.PaintEventHandler(this.tabPageSimulation_Paint);
             // 
             // hScrollBarSimulator
             // 
-            this.hScrollBarSimulator.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.hScrollBarSimulator.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.hScrollBarSimulator.Location = new System.Drawing.Point(3, 260);
+            this.hScrollBarSimulator.Maximum = 10000;
             this.hScrollBarSimulator.Name = "hScrollBarSimulator";
-            this.hScrollBarSimulator.Size = new System.Drawing.Size(347, 17);
+            this.hScrollBarSimulator.Size = new System.Drawing.Size(344, 17);
             this.hScrollBarSimulator.TabIndex = 1;
             // 
             // vScrollBarSimulator
             // 
-            this.vScrollBarSimulator.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.vScrollBarSimulator.Location = new System.Drawing.Point(350, -1);
+            this.vScrollBarSimulator.Dock = System.Windows.Forms.DockStyle.Right;
+            this.vScrollBarSimulator.Location = new System.Drawing.Point(347, 3);
+            this.vScrollBarSimulator.Maximum = 10000;
             this.vScrollBarSimulator.Name = "vScrollBarSimulator";
-            this.vScrollBarSimulator.Size = new System.Drawing.Size(17, 278);
+            this.vScrollBarSimulator.Size = new System.Drawing.Size(17, 274);
             this.vScrollBarSimulator.TabIndex = 0;
+            this.vScrollBarSimulator.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBarSimulator_Scroll);
             // 
             // tabPageCodeView
             // 
@@ -514,11 +525,49 @@
             this.tabPageCodeView.ToolTipText = "view the code of data structure selected";
             this.tabPageCodeView.UseVisualStyleBackColor = true;
             // 
+            // groupBoxSettings
+            // 
+            this.groupBoxSettings.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.groupBoxSettings.Controls.Add(this.canvasColor);
+            this.groupBoxSettings.Controls.Add(this.button1);
+            this.groupBoxSettings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxSettings.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxSettings.Name = "groupBoxSettings";
+            this.groupBoxSettings.Size = new System.Drawing.Size(375, 127);
+            this.groupBoxSettings.TabIndex = 14;
+            this.groupBoxSettings.TabStop = false;
+            this.groupBoxSettings.Text = "Settings";
+            // 
+            // canvasColor
+            // 
+            this.canvasColor.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.canvasColor.Location = new System.Drawing.Point(88, 33);
+            this.canvasColor.Name = "canvasColor";
+            this.canvasColor.Size = new System.Drawing.Size(24, 21);
+            this.canvasColor.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.AutoSize = true;
+            this.button1.Location = new System.Drawing.Point(7, 31);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Cavas Color";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // labelOnlyInteger
+            // 
+            this.labelOnlyInteger.AutoSize = true;
+            this.labelOnlyInteger.Location = new System.Drawing.Point(18, 9);
+            this.labelOnlyInteger.Name = "labelOnlyInteger";
+            this.labelOnlyInteger.Size = new System.Drawing.Size(0, 13);
+            this.labelOnlyInteger.TabIndex = 13;
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dataStructureToolStripMenuItem,
-            this.settingsToolStripMenuItem});
+            this.dataStructureToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(584, 24);
@@ -543,22 +592,6 @@
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click_1);
             // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.Image = global::Data_Structure_Simulator.Properties.Resources.download__1_;
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
-            this.settingsToolStripMenuItem.Text = "Settings";
-            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
-            // 
-            // labelOnlyInteger
-            // 
-            this.labelOnlyInteger.AutoSize = true;
-            this.labelOnlyInteger.Location = new System.Drawing.Point(18, 9);
-            this.labelOnlyInteger.Name = "labelOnlyInteger";
-            this.labelOnlyInteger.Size = new System.Drawing.Size(0, 13);
-            this.labelOnlyInteger.TabIndex = 13;
-            // 
             // dataStructureSimulator
             // 
             this.ClientSize = new System.Drawing.Size(584, 461);
@@ -568,6 +601,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MaximumSize = new System.Drawing.Size(1366, 768);
             this.Name = "dataStructureSimulator";
+            this.Load += new System.EventHandler(this.dataStructureSimulator_Load);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
@@ -589,6 +623,8 @@
             this.splitContainer.ResumeLayout(false);
             this.tabControlDsSimulator.ResumeLayout(false);
             this.tabPageSimulation.ResumeLayout(false);
+            this.groupBoxSettings.ResumeLayout(false);
+            this.groupBoxSettings.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -600,7 +636,6 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.SplitContainer splitContainer;
         //........................ScrollBars.................................
-        private System.Windows.Forms.HScrollBar hScrollBarSimulator;
         //.......................TAb Controls..................................
         private System.Windows.Forms.TabControl tabControlDsSimulator;
         private System.Windows.Forms.TabPage tabPageCodeView;
@@ -619,7 +654,6 @@
         //....................................MenuStrip...............................................
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem dataStructureToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         //............................. For Linked List.................................................... 
         
         private System.Windows.Forms.GroupBox groupBoxOptionsLinkedList;
@@ -646,8 +680,12 @@
         private System.Windows.Forms.Label labelTreeNodes;
         private System.Windows.Forms.Label labelNode;
         public System.Windows.Forms.TabPage tabPageSimulation;
-        private System.Windows.Forms.VScrollBar vScrollBarSimulator;
         private System.Windows.Forms.Label labelOnlyInteger;
+        private System.Windows.Forms.HScrollBar hScrollBarSimulator;
+        private System.Windows.Forms.VScrollBar vScrollBarSimulator;
+        private System.Windows.Forms.GroupBox groupBoxSettings;
+        private System.Windows.Forms.Label canvasColor;
+        private System.Windows.Forms.Button button1;
     }
 }
 
