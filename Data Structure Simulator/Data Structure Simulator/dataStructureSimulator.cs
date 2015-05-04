@@ -140,7 +140,7 @@ namespace Data_Structure_Simulator
                     node newNode = new node(number, x_axisShape, y_axisShape);
                     draw(ref newNode);
                     top = newNode;
-                    drawTop(ref newNode);
+                    drawTop();
                     return;
                 }
                 node current = top;
@@ -154,7 +154,7 @@ namespace Data_Structure_Simulator
                         draw(ref newNode);
                         tabPageSimulation.Refresh();
                         repaintStack();
-                        drawTop(ref newNode);
+                        drawTop();
                         added = true;
                     }
                     else
@@ -173,7 +173,8 @@ namespace Data_Structure_Simulator
         {
             pop();
             tabPageSimulation.Refresh();
-            repaintStack();  
+            repaintStack();
+            drawTop();
         } 
         private void pop()
         {
@@ -214,19 +215,25 @@ namespace Data_Structure_Simulator
             Brush b = new SolidBrush(Color.Blue);
             graphics.DrawString(current.value.ToString(), font, b, current.x_axis+30, current.y_axis+20);
             graphics.DrawRectangle(pen, current.x_axis, current.y_axis, 100, 50);
-         //   drawTop(ref current);
         }
-        public void drawTop(ref node current)
-        {   
+        public void drawTop()
+        {
+            node prev = top;
+            node current = top.left;
+            while (current != null)
+            {
+                prev = current;
+                current = current.left;
+            }
             graphics = tabPageSimulation.CreateGraphics();
             brush = new SolidBrush(Color.Blue);
             pen = new Pen(brush, 4);
             pen.EndCap = LineCap.ArrowAnchor;
             font = new Font("Arial", 12);
             string text = "Top";
-            var point1 = new Point(current.x_axis -60, current.y_axis+20);
-            var point2 = new Point(current.x_axis, current.y_axis +20);
-            graphics.DrawString(text, font, brush, current.x_axis-100, current.y_axis+10);
+            var point1 = new Point(prev.x_axis -60, prev.y_axis+20);
+            var point2 = new Point(prev.x_axis, prev.y_axis +20);
+            graphics.DrawString(text, font, brush, prev.x_axis - 100, prev.y_axis + 10);
             graphics.DrawLine(pen, point1, point2);
         }
         private void repaintStack()
