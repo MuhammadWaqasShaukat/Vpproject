@@ -62,6 +62,7 @@ namespace Data_Structure_Simulator
         Pen pen;
         Bitmap image;
         Font font;
+        int count=0;
         //.................................................................................//
         public dataStructureSimulator()
         {
@@ -74,6 +75,7 @@ namespace Data_Structure_Simulator
             dataStructureUsed.Text = radioButtonStack.Text.ToString();
             groupBoxInput.Show();
             groupBoxOptionsStack.Show();
+            groupBoxInformation.Show();
         }
 
         private void radioButtonLinkedList_CheckedChanged(object sender, EventArgs e)
@@ -132,15 +134,17 @@ namespace Data_Structure_Simulator
             bool added = false;
             try
             {
+                actionLable.Text = "Push".ToString();
                 x_axisShape = tabPageSimulation.Width / 2;
                 int number = Int32.Parse(textBoxForInput.Text);
                 if (top == null)
                 {
                     y_axisShape = tabPageSimulation.Height - 100;
                     node newNode = new node(number, x_axisShape, y_axisShape);
-                    draw(ref newNode);
+                    drawStack(ref newNode);
                     top = newNode;
                     drawTop();
+                    countLable.Text = (++count).ToString();
                     return;
                 }
                 node current = top;
@@ -151,11 +155,12 @@ namespace Data_Structure_Simulator
                         y_axisShape = current.y_axis - 50;
                         node newNode = new node(number, x_axisShape, y_axisShape);
                         current.left = newNode;
-                        draw(ref newNode);
+                        drawStack(ref newNode);
                         tabPageSimulation.Refresh();
                         repaintStack();
                         drawTop();
                         added = true;
+                        countLable.Text = (++count).ToString();
                     }
                     else
                     {
@@ -180,6 +185,7 @@ namespace Data_Structure_Simulator
         {
             try
             {
+                actionLable.Text = "Pop".ToString();
                 if (top == null)
                 {
                     MessageBox.Show("Stack is Empty Stop Poping");
@@ -187,7 +193,9 @@ namespace Data_Structure_Simulator
                 else if (top.left == null)
                 {
                     top = null;
+                    countLable.Text = (--count).ToString();
                     return;
+                    
                 }
                 else
                 {
@@ -199,18 +207,20 @@ namespace Data_Structure_Simulator
                         current = current.left;
                     }
                     prev.left = null;
+                    countLable.Text = (--count).ToString();
                 }
             }
             catch
             {
                 MessageBox.Show("Top is Now Null");
             }
+           
            }
         
-        public void draw(ref node current)
+        public void drawStack(ref node current)
         {
             graphics = tabPageSimulation.CreateGraphics();
-            pen = new Pen(Brushes.Red, 5);
+            pen = new Pen(Brushes.Blue, 5);
             Font font = new Font("Arial", 12);
             Brush b = new SolidBrush(Color.Blue);
             graphics.DrawString(current.value.ToString(), font, b, current.x_axis+30, current.y_axis+20);
@@ -218,32 +228,41 @@ namespace Data_Structure_Simulator
         }
         public void drawTop()
         {
-            node prev = top;
-            node current = top.left;
-            while (current != null)
+            try
             {
-                prev = current;
-                current = current.left;
+                node prev = top;
+                node current = top.left;
+                while (current != null)
+                {
+                    prev = current;
+                    current = current.left;
+                }
+                graphics = tabPageSimulation.CreateGraphics();
+                brush = new SolidBrush(Color.Red);
+                pen = new Pen(brush, 4);
+                pen.EndCap = LineCap.ArrowAnchor;
+                font = new Font("Arial", 12);
+                string text = "Top";
+                var point1 = new Point(prev.x_axis - 60, prev.y_axis + 20);
+                var point2 = new Point(prev.x_axis, prev.y_axis + 20);
+                graphics.DrawString(text, font, brush, prev.x_axis - 100, prev.y_axis + 10);
+                graphics.DrawLine(pen, point1, point2);
+                topLabel.Text = prev.value.ToString();
+           }
+            catch
+            {
+                //
             }
-            graphics = tabPageSimulation.CreateGraphics();
-            brush = new SolidBrush(Color.Blue);
-            pen = new Pen(brush, 4);
-            pen.EndCap = LineCap.ArrowAnchor;
-            font = new Font("Arial", 12);
-            string text = "Top";
-            var point1 = new Point(prev.x_axis -60, prev.y_axis+20);
-            var point2 = new Point(prev.x_axis, prev.y_axis +20);
-            graphics.DrawString(text, font, brush, prev.x_axis - 100, prev.y_axis + 10);
-            graphics.DrawLine(pen, point1, point2);
         }
         private void repaintStack()
         {
            node N = top;
            while(N!=null)      
             {
-               draw(ref N);
+               drawStack(ref N);
                N = N.left;
             }
+           drawTop();
         }
         //...........................................Linked List Options............................//
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -460,6 +479,8 @@ namespace Data_Structure_Simulator
         {
            
         }
+
+    
 
 
 

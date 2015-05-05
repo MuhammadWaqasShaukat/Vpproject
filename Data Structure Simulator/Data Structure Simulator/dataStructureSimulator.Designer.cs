@@ -65,9 +65,13 @@
             this.hScrollBarSimulator = new System.Windows.Forms.HScrollBar();
             this.vScrollBarSimulator = new System.Windows.Forms.VScrollBar();
             this.tabPageCodeView = new System.Windows.Forms.TabPage();
-            this.groupBoxSettings = new System.Windows.Forms.GroupBox();
-            this.canvasColor = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.groupBoxInformation = new System.Windows.Forms.GroupBox();
+            this.labelCount = new System.Windows.Forms.Label();
+            this.countLable = new System.Windows.Forms.Label();
+            this.actionLable = new System.Windows.Forms.Label();
+            this.labelLastAction = new System.Windows.Forms.Label();
+            this.topLabel = new System.Windows.Forms.Label();
+            this.labelTopsValue = new System.Windows.Forms.Label();
             this.labelOnlyInteger = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.dataStructureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,7 +91,7 @@
             this.splitContainer.SuspendLayout();
             this.tabControlDsSimulator.SuspendLayout();
             this.tabPageSimulation.SuspendLayout();
-            this.groupBoxSettings.SuspendLayout();
+            this.groupBoxInformation.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -461,7 +465,7 @@
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.BackColor = System.Drawing.Color.GhostWhite;
-            this.splitContainer.Panel2.Controls.Add(this.groupBoxSettings);
+            this.splitContainer.Panel2.Controls.Add(this.groupBoxInformation);
             this.splitContainer.Panel2.Controls.Add(this.labelOnlyInteger);
             this.splitContainer.Size = new System.Drawing.Size(375, 437);
             this.splitContainer.SplitterDistance = 306;
@@ -525,36 +529,74 @@
             this.tabPageCodeView.ToolTipText = "view the code of data structure selected";
             this.tabPageCodeView.UseVisualStyleBackColor = true;
             // 
-            // groupBoxSettings
+            // groupBoxInformation
             // 
-            this.groupBoxSettings.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.groupBoxSettings.Controls.Add(this.canvasColor);
-            this.groupBoxSettings.Controls.Add(this.button1);
-            this.groupBoxSettings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxSettings.Location = new System.Drawing.Point(0, 0);
-            this.groupBoxSettings.Name = "groupBoxSettings";
-            this.groupBoxSettings.Size = new System.Drawing.Size(375, 127);
-            this.groupBoxSettings.TabIndex = 14;
-            this.groupBoxSettings.TabStop = false;
-            this.groupBoxSettings.Text = "Settings";
+            this.groupBoxInformation.BackColor = System.Drawing.Color.AliceBlue;
+            this.groupBoxInformation.Controls.Add(this.labelCount);
+            this.groupBoxInformation.Controls.Add(this.countLable);
+            this.groupBoxInformation.Controls.Add(this.actionLable);
+            this.groupBoxInformation.Controls.Add(this.labelLastAction);
+            this.groupBoxInformation.Controls.Add(this.topLabel);
+            this.groupBoxInformation.Controls.Add(this.labelTopsValue);
+            this.groupBoxInformation.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxInformation.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxInformation.Name = "groupBoxInformation";
+            this.groupBoxInformation.Size = new System.Drawing.Size(375, 127);
+            this.groupBoxInformation.TabIndex = 14;
+            this.groupBoxInformation.TabStop = false;
+            this.groupBoxInformation.Text = "Information";
+            this.groupBoxInformation.Visible = false;
             // 
-            // canvasColor
+            // labelCount
             // 
-            this.canvasColor.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.canvasColor.Location = new System.Drawing.Point(88, 33);
-            this.canvasColor.Name = "canvasColor";
-            this.canvasColor.Size = new System.Drawing.Size(24, 21);
-            this.canvasColor.TabIndex = 1;
+            this.labelCount.AutoSize = true;
+            this.labelCount.Location = new System.Drawing.Point(18, 67);
+            this.labelCount.Name = "labelCount";
+            this.labelCount.Size = new System.Drawing.Size(38, 13);
+            this.labelCount.TabIndex = 5;
+            this.labelCount.Text = "Count:";
             // 
-            // button1
+            // countLable
             // 
-            this.button1.AutoSize = true;
-            this.button1.Location = new System.Drawing.Point(7, 31);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Cavas Color";
-            this.button1.UseVisualStyleBackColor = true;
+            this.countLable.AutoSize = true;
+            this.countLable.Location = new System.Drawing.Point(87, 67);
+            this.countLable.Name = "countLable";
+            this.countLable.Size = new System.Drawing.Size(0, 13);
+            this.countLable.TabIndex = 4;
+            // 
+            // actionLable
+            // 
+            this.actionLable.AutoSize = true;
+            this.actionLable.Location = new System.Drawing.Point(87, 44);
+            this.actionLable.Name = "actionLable";
+            this.actionLable.Size = new System.Drawing.Size(0, 13);
+            this.actionLable.TabIndex = 3;
+            // 
+            // labelLastAction
+            // 
+            this.labelLastAction.AutoSize = true;
+            this.labelLastAction.Location = new System.Drawing.Point(18, 44);
+            this.labelLastAction.Name = "labelLastAction";
+            this.labelLastAction.Size = new System.Drawing.Size(63, 13);
+            this.labelLastAction.TabIndex = 2;
+            this.labelLastAction.Text = "Last Action:";
+            // 
+            // topLabel
+            // 
+            this.topLabel.AutoSize = true;
+            this.topLabel.Location = new System.Drawing.Point(87, 22);
+            this.topLabel.Name = "topLabel";
+            this.topLabel.Size = new System.Drawing.Size(0, 13);
+            this.topLabel.TabIndex = 1;
+            // 
+            // labelTopsValue
+            // 
+            this.labelTopsValue.AutoSize = true;
+            this.labelTopsValue.Location = new System.Drawing.Point(18, 22);
+            this.labelTopsValue.Name = "labelTopsValue";
+            this.labelTopsValue.Size = new System.Drawing.Size(66, 13);
+            this.labelTopsValue.TabIndex = 0;
+            this.labelTopsValue.Text = "Top\'s Value:";
             // 
             // labelOnlyInteger
             // 
@@ -623,8 +665,8 @@
             this.splitContainer.ResumeLayout(false);
             this.tabControlDsSimulator.ResumeLayout(false);
             this.tabPageSimulation.ResumeLayout(false);
-            this.groupBoxSettings.ResumeLayout(false);
-            this.groupBoxSettings.PerformLayout();
+            this.groupBoxInformation.ResumeLayout(false);
+            this.groupBoxInformation.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -683,9 +725,13 @@
         private System.Windows.Forms.Label labelOnlyInteger;
         private System.Windows.Forms.HScrollBar hScrollBarSimulator;
         private System.Windows.Forms.VScrollBar vScrollBarSimulator;
-        private System.Windows.Forms.GroupBox groupBoxSettings;
-        private System.Windows.Forms.Label canvasColor;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox groupBoxInformation;
+        private System.Windows.Forms.Label labelCount;
+        private System.Windows.Forms.Label countLable;
+        private System.Windows.Forms.Label actionLable;
+        private System.Windows.Forms.Label labelLastAction;
+        private System.Windows.Forms.Label topLabel;
+        private System.Windows.Forms.Label labelTopsValue;
     }
 }
 
