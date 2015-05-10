@@ -28,33 +28,31 @@
         /// </summary>
         public void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.groupBoxInput = new System.Windows.Forms.GroupBox();
+            this.buttonNewSimulation = new System.Windows.Forms.Button();
+            this.labelAddAfter = new System.Windows.Forms.Label();
             this.ShowDataStructureBeingUsed = new System.Windows.Forms.Label();
             this.textBoxForInput = new System.Windows.Forms.TextBox();
             this.dataStructureUsed = new System.Windows.Forms.Label();
+            this.textBoxAddAfter = new System.Windows.Forms.TextBox();
             this.labelNumberForInput = new System.Windows.Forms.Label();
             this.groupBoxOptionsTree = new System.Windows.Forms.GroupBox();
-            this.labelTreeNodes = new System.Windows.Forms.Label();
-            this.labelNode = new System.Windows.Forms.Label();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonFind = new System.Windows.Forms.Button();
             this.buttonInsert = new System.Windows.Forms.Button();
             this.groupBoxOptionsLinkedList = new System.Windows.Forms.GroupBox();
-            this.labelAddAfter = new System.Windows.Forms.Label();
             this.labelAddAt = new System.Windows.Forms.Label();
-            this.buttonSearch = new System.Windows.Forms.Button();
-            this.textBoxAddAfter = new System.Windows.Forms.TextBox();
-            this.radioButtonAddAtEnd = new System.Windows.Forms.RadioButton();
-            this.radioButtonAddAtMiddle = new System.Windows.Forms.RadioButton();
-            this.radioButtonAddAtStart = new System.Windows.Forms.RadioButton();
-            this.buttonRemove = new System.Windows.Forms.Button();
-            this.buttonAdd = new System.Windows.Forms.Button();
             this.groupBoxOptionsStack = new System.Windows.Forms.GroupBox();
             this.buttonPop = new System.Windows.Forms.Button();
             this.buttonPush = new System.Windows.Forms.Button();
-            this.topValue = new System.Windows.Forms.Label();
-            this.labelTop = new System.Windows.Forms.Label();
+            this.buttonSearch = new System.Windows.Forms.Button();
+            this.radioButtonAddAtEndLinkedList = new System.Windows.Forms.RadioButton();
+            this.radioButtonAddAtMiddleLinkedList = new System.Windows.Forms.RadioButton();
+            this.radioButtonAddAtStartLinkedList = new System.Windows.Forms.RadioButton();
+            this.buttonRemove = new System.Windows.Forms.Button();
+            this.buttonAdd = new System.Windows.Forms.Button();
             this.groupBoxDataStructure = new System.Windows.Forms.GroupBox();
             this.radioButtonTree = new System.Windows.Forms.RadioButton();
             this.radioButtonLinkedList = new System.Windows.Forms.RadioButton();
@@ -76,6 +74,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.dataStructureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.animationTime = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -105,35 +104,63 @@
             // 
             this.splitContainer2.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.splitContainer2.Panel1.Controls.Add(this.groupBoxInput);
-            this.splitContainer2.Panel1.Controls.Add(this.groupBoxOptionsTree);
-            this.splitContainer2.Panel1.Controls.Add(this.groupBoxOptionsLinkedList);
             this.splitContainer2.Panel1.Controls.Add(this.groupBoxOptionsStack);
+            this.splitContainer2.Panel1.Controls.Add(this.groupBoxOptionsLinkedList);
+            this.splitContainer2.Panel1.Controls.Add(this.groupBoxOptionsTree);
             this.splitContainer2.Panel1.Controls.Add(this.groupBoxDataStructure);
-            this.splitContainer2.Panel1.Margin = new System.Windows.Forms.Padding(300, 0, 0, 0);
+            this.splitContainer2.Panel1.Margin = new System.Windows.Forms.Padding(0, 0, 400, 0);
             this.splitContainer2.Panel1.Padding = new System.Windows.Forms.Padding(3);
             // 
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer);
-            this.splitContainer2.Size = new System.Drawing.Size(584, 437);
-            this.splitContainer2.SplitterDistance = 205;
+            this.splitContainer2.Size = new System.Drawing.Size(584, 387);
+            this.splitContainer2.SplitterDistance = 207;
             this.splitContainer2.TabIndex = 1;
             // 
             // groupBoxInput
             // 
             this.groupBoxInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxInput.Controls.Add(this.buttonNewSimulation);
+            this.groupBoxInput.Controls.Add(this.labelAddAfter);
             this.groupBoxInput.Controls.Add(this.ShowDataStructureBeingUsed);
             this.groupBoxInput.Controls.Add(this.textBoxForInput);
             this.groupBoxInput.Controls.Add(this.dataStructureUsed);
+            this.groupBoxInput.Controls.Add(this.textBoxAddAfter);
             this.groupBoxInput.Controls.Add(this.labelNumberForInput);
             this.groupBoxInput.Location = new System.Drawing.Point(6, 6);
             this.groupBoxInput.Name = "groupBoxInput";
-            this.groupBoxInput.Size = new System.Drawing.Size(192, 103);
+            this.groupBoxInput.Size = new System.Drawing.Size(193, 129);
             this.groupBoxInput.TabIndex = 13;
             this.groupBoxInput.TabStop = false;
             this.groupBoxInput.Text = "Input";
             this.groupBoxInput.Visible = false;
+            // 
+            // buttonNewSimulation
+            // 
+            this.buttonNewSimulation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonNewSimulation.BackColor = System.Drawing.SystemColors.Menu;
+            this.buttonNewSimulation.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.buttonNewSimulation.FlatAppearance.BorderSize = 2;
+            this.buttonNewSimulation.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.buttonNewSimulation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonNewSimulation.Location = new System.Drawing.Point(6, 100);
+            this.buttonNewSimulation.Name = "buttonNewSimulation";
+            this.buttonNewSimulation.Size = new System.Drawing.Size(180, 23);
+            this.buttonNewSimulation.TabIndex = 13;
+            this.buttonNewSimulation.UseVisualStyleBackColor = false;
+            this.buttonNewSimulation.Click += new System.EventHandler(this.buttonNewSimulation_Click);
+            // 
+            // labelAddAfter
+            // 
+            this.labelAddAfter.AutoSize = true;
+            this.labelAddAfter.Location = new System.Drawing.Point(12, 80);
+            this.labelAddAfter.Name = "labelAddAfter";
+            this.labelAddAfter.Size = new System.Drawing.Size(57, 13);
+            this.labelAddAfter.TabIndex = 8;
+            this.labelAddAfter.Text = "Add After :";
             // 
             // ShowDataStructureBeingUsed
             // 
@@ -146,9 +173,9 @@
             // 
             // textBoxForInput
             // 
-            this.textBoxForInput.Location = new System.Drawing.Point(65, 55);
+            this.textBoxForInput.Location = new System.Drawing.Point(96, 52);
             this.textBoxForInput.Name = "textBoxForInput";
-            this.textBoxForInput.Size = new System.Drawing.Size(100, 20);
+            this.textBoxForInput.Size = new System.Drawing.Size(61, 20);
             this.textBoxForInput.TabIndex = 12;
             // 
             // dataStructureUsed
@@ -159,55 +186,43 @@
             this.dataStructureUsed.Size = new System.Drawing.Size(0, 13);
             this.dataStructureUsed.TabIndex = 1;
             // 
+            // textBoxAddAfter
+            // 
+            this.textBoxAddAfter.Enabled = false;
+            this.textBoxAddAfter.Location = new System.Drawing.Point(96, 77);
+            this.textBoxAddAfter.Name = "textBoxAddAfter";
+            this.textBoxAddAfter.Size = new System.Drawing.Size(61, 20);
+            this.textBoxAddAfter.TabIndex = 5;
+            // 
             // labelNumberForInput
             // 
             this.labelNumberForInput.AutoSize = true;
             this.labelNumberForInput.Location = new System.Drawing.Point(12, 58);
             this.labelNumberForInput.Name = "labelNumberForInput";
-            this.labelNumberForInput.Size = new System.Drawing.Size(47, 13);
+            this.labelNumberForInput.Size = new System.Drawing.Size(78, 13);
             this.labelNumberForInput.TabIndex = 11;
-            this.labelNumberForInput.Text = "Number:";
+            this.labelNumberForInput.Text = "Enter Number :";
             // 
             // groupBoxOptionsTree
             // 
-            this.groupBoxOptionsTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupBoxOptionsTree.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxOptionsTree.Controls.Add(this.labelTreeNodes);
-            this.groupBoxOptionsTree.Controls.Add(this.labelNode);
             this.groupBoxOptionsTree.Controls.Add(this.buttonDelete);
             this.groupBoxOptionsTree.Controls.Add(this.buttonFind);
             this.groupBoxOptionsTree.Controls.Add(this.buttonInsert);
-            this.groupBoxOptionsTree.Location = new System.Drawing.Point(5, 109);
+            this.groupBoxOptionsTree.Location = new System.Drawing.Point(10, 141);
             this.groupBoxOptionsTree.Name = "groupBoxOptionsTree";
-            this.groupBoxOptionsTree.Size = new System.Drawing.Size(193, 100);
+            this.groupBoxOptionsTree.Size = new System.Drawing.Size(189, 100);
             this.groupBoxOptionsTree.TabIndex = 0;
             this.groupBoxOptionsTree.TabStop = false;
             this.groupBoxOptionsTree.Text = "Options";
             this.groupBoxOptionsTree.Visible = false;
             // 
-            // labelTreeNodes
-            // 
-            this.labelTreeNodes.AutoSize = true;
-            this.labelTreeNodes.Location = new System.Drawing.Point(57, 20);
-            this.labelTreeNodes.Name = "labelTreeNodes";
-            this.labelTreeNodes.Size = new System.Drawing.Size(0, 13);
-            this.labelTreeNodes.TabIndex = 4;
-            // 
-            // labelNode
-            // 
-            this.labelNode.AutoSize = true;
-            this.labelNode.Location = new System.Drawing.Point(15, 20);
-            this.labelNode.Name = "labelNode";
-            this.labelNode.Size = new System.Drawing.Size(47, 13);
-            this.labelNode.TabIndex = 3;
-            this.labelNode.Text = "Nodes : ";
-            // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(121, 48);
+            this.buttonDelete.Location = new System.Drawing.Point(126, 15);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(47, 23);
+            this.buttonDelete.Size = new System.Drawing.Size(60, 62);
             this.buttonDelete.TabIndex = 2;
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = true;
@@ -215,9 +230,9 @@
             // 
             // buttonFind
             // 
-            this.buttonFind.Location = new System.Drawing.Point(68, 48);
+            this.buttonFind.Location = new System.Drawing.Point(66, 15);
             this.buttonFind.Name = "buttonFind";
-            this.buttonFind.Size = new System.Drawing.Size(47, 23);
+            this.buttonFind.Size = new System.Drawing.Size(60, 62);
             this.buttonFind.TabIndex = 1;
             this.buttonFind.Text = "Find";
             this.buttonFind.UseVisualStyleBackColor = true;
@@ -225,9 +240,9 @@
             // 
             // buttonInsert
             // 
-            this.buttonInsert.Location = new System.Drawing.Point(15, 48);
+            this.buttonInsert.Location = new System.Drawing.Point(6, 15);
             this.buttonInsert.Name = "buttonInsert";
-            this.buttonInsert.Size = new System.Drawing.Size(47, 23);
+            this.buttonInsert.Size = new System.Drawing.Size(60, 62);
             this.buttonInsert.TabIndex = 0;
             this.buttonInsert.Text = "Insert";
             this.buttonInsert.UseVisualStyleBackColor = true;
@@ -237,113 +252,30 @@
             // 
             this.groupBoxOptionsLinkedList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxOptionsLinkedList.Controls.Add(this.labelAddAfter);
             this.groupBoxOptionsLinkedList.Controls.Add(this.labelAddAt);
             this.groupBoxOptionsLinkedList.Controls.Add(this.buttonSearch);
-            this.groupBoxOptionsLinkedList.Controls.Add(this.textBoxAddAfter);
-            this.groupBoxOptionsLinkedList.Controls.Add(this.radioButtonAddAtEnd);
-            this.groupBoxOptionsLinkedList.Controls.Add(this.radioButtonAddAtMiddle);
-            this.groupBoxOptionsLinkedList.Controls.Add(this.radioButtonAddAtStart);
+            this.groupBoxOptionsLinkedList.Controls.Add(this.radioButtonAddAtEndLinkedList);
+            this.groupBoxOptionsLinkedList.Controls.Add(this.radioButtonAddAtMiddleLinkedList);
+            this.groupBoxOptionsLinkedList.Controls.Add(this.radioButtonAddAtStartLinkedList);
             this.groupBoxOptionsLinkedList.Controls.Add(this.buttonRemove);
             this.groupBoxOptionsLinkedList.Controls.Add(this.buttonAdd);
-            this.groupBoxOptionsLinkedList.Location = new System.Drawing.Point(5, 115);
+            this.groupBoxOptionsLinkedList.Location = new System.Drawing.Point(6, 141);
             this.groupBoxOptionsLinkedList.Name = "groupBoxOptionsLinkedList";
-            this.groupBoxOptionsLinkedList.Size = new System.Drawing.Size(193, 163);
+            this.groupBoxOptionsLinkedList.Size = new System.Drawing.Size(193, 133);
             this.groupBoxOptionsLinkedList.TabIndex = 4;
             this.groupBoxOptionsLinkedList.TabStop = false;
             this.groupBoxOptionsLinkedList.Text = "Options";
             this.groupBoxOptionsLinkedList.Visible = false;
             // 
-            // labelAddAfter
-            // 
-            this.labelAddAfter.AutoSize = true;
-            this.labelAddAfter.Location = new System.Drawing.Point(13, 135);
-            this.labelAddAfter.Name = "labelAddAfter";
-            this.labelAddAfter.Size = new System.Drawing.Size(57, 13);
-            this.labelAddAfter.TabIndex = 8;
-            this.labelAddAfter.Text = "Add After :";
-            // 
             // labelAddAt
             // 
             this.labelAddAt.AutoSize = true;
-            this.labelAddAt.Location = new System.Drawing.Point(7, 71);
+            this.labelAddAt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAddAt.Location = new System.Drawing.Point(6, 88);
             this.labelAddAt.Name = "labelAddAt";
-            this.labelAddAt.Size = new System.Drawing.Size(45, 13);
+            this.labelAddAt.Size = new System.Drawing.Size(176, 15);
             this.labelAddAt.TabIndex = 7;
-            this.labelAddAt.Text = "Add At :";
-            // 
-            // buttonSearch
-            // 
-            this.buttonSearch.Location = new System.Drawing.Point(59, 33);
-            this.buttonSearch.Name = "buttonSearch";
-            this.buttonSearch.Size = new System.Drawing.Size(58, 23);
-            this.buttonSearch.TabIndex = 6;
-            this.buttonSearch.Text = "Search";
-            this.buttonSearch.UseVisualStyleBackColor = true;
-            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
-            // 
-            // textBoxAddAfter
-            // 
-            this.textBoxAddAfter.Location = new System.Drawing.Point(76, 132);
-            this.textBoxAddAfter.Name = "textBoxAddAfter";
-            this.textBoxAddAfter.Size = new System.Drawing.Size(76, 20);
-            this.textBoxAddAfter.TabIndex = 5;
-            // 
-            // radioButtonAddAtEnd
-            // 
-            this.radioButtonAddAtEnd.AutoSize = true;
-            this.radioButtonAddAtEnd.Location = new System.Drawing.Point(133, 96);
-            this.radioButtonAddAtEnd.Name = "radioButtonAddAtEnd";
-            this.radioButtonAddAtEnd.Size = new System.Drawing.Size(44, 17);
-            this.radioButtonAddAtEnd.TabIndex = 4;
-            this.radioButtonAddAtEnd.TabStop = true;
-            this.radioButtonAddAtEnd.Text = "End";
-            this.radioButtonAddAtEnd.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonAddAtMiddle
-            // 
-            this.radioButtonAddAtMiddle.AutoSize = true;
-            this.radioButtonAddAtMiddle.Location = new System.Drawing.Point(78, 96);
-            this.radioButtonAddAtMiddle.Name = "radioButtonAddAtMiddle";
-            this.radioButtonAddAtMiddle.Size = new System.Drawing.Size(56, 17);
-            this.radioButtonAddAtMiddle.TabIndex = 3;
-            this.radioButtonAddAtMiddle.TabStop = true;
-            this.radioButtonAddAtMiddle.Text = "Middle";
-            this.radioButtonAddAtMiddle.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonAddAtStart
-            // 
-            this.radioButtonAddAtStart.AutoSize = true;
-            this.radioButtonAddAtStart.Location = new System.Drawing.Point(23, 96);
-            this.radioButtonAddAtStart.Name = "radioButtonAddAtStart";
-            this.radioButtonAddAtStart.Size = new System.Drawing.Size(47, 17);
-            this.radioButtonAddAtStart.TabIndex = 2;
-            this.radioButtonAddAtStart.TabStop = true;
-            this.radioButtonAddAtStart.Text = "Start";
-            this.radioButtonAddAtStart.UseVisualStyleBackColor = true;
-            // 
-            // buttonRemove
-            // 
-            this.buttonRemove.Location = new System.Drawing.Point(117, 33);
-            this.buttonRemove.Name = "buttonRemove";
-            this.buttonRemove.Size = new System.Drawing.Size(59, 23);
-            this.buttonRemove.TabIndex = 1;
-            this.buttonRemove.Text = "Remove";
-            this.buttonRemove.UseVisualStyleBackColor = true;
-            this.buttonRemove.Click += new System.EventHandler(this.buttonRemove_Click);
-            // 
-            // buttonAdd
-            // 
-            this.buttonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAdd.Location = new System.Drawing.Point(6, 33);
-            this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(62, 23);
-            this.buttonAdd.TabIndex = 0;
-            this.buttonAdd.Text = "Add";
-            this.buttonAdd.UseVisualStyleBackColor = true;
-            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+            this.labelAddAt.Text = "Select For Add / Delete Options";
             // 
             // groupBoxOptionsStack
             // 
@@ -351,11 +283,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxOptionsStack.Controls.Add(this.buttonPop);
             this.groupBoxOptionsStack.Controls.Add(this.buttonPush);
-            this.groupBoxOptionsStack.Controls.Add(this.topValue);
-            this.groupBoxOptionsStack.Controls.Add(this.labelTop);
-            this.groupBoxOptionsStack.Location = new System.Drawing.Point(6, 115);
+            this.groupBoxOptionsStack.Location = new System.Drawing.Point(6, 141);
             this.groupBoxOptionsStack.Name = "groupBoxOptionsStack";
-            this.groupBoxOptionsStack.Size = new System.Drawing.Size(192, 94);
+            this.groupBoxOptionsStack.Size = new System.Drawing.Size(193, 85);
             this.groupBoxOptionsStack.TabIndex = 13;
             this.groupBoxOptionsStack.TabStop = false;
             this.groupBoxOptionsStack.Text = "Options";
@@ -363,9 +293,9 @@
             // 
             // buttonPop
             // 
-            this.buttonPop.Location = new System.Drawing.Point(87, 48);
+            this.buttonPop.Location = new System.Drawing.Point(91, 19);
             this.buttonPop.Name = "buttonPop";
-            this.buttonPop.Size = new System.Drawing.Size(75, 27);
+            this.buttonPop.Size = new System.Drawing.Size(66, 56);
             this.buttonPop.TabIndex = 3;
             this.buttonPop.Text = "Pop";
             this.buttonPop.UseVisualStyleBackColor = true;
@@ -373,31 +303,78 @@
             // 
             // buttonPush
             // 
-            this.buttonPush.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonPush.Location = new System.Drawing.Point(10, 48);
+            this.buttonPush.Location = new System.Drawing.Point(19, 19);
             this.buttonPush.Name = "buttonPush";
-            this.buttonPush.Size = new System.Drawing.Size(75, 27);
+            this.buttonPush.Size = new System.Drawing.Size(66, 56);
             this.buttonPush.TabIndex = 2;
             this.buttonPush.Text = "Push";
             this.buttonPush.UseVisualStyleBackColor = true;
             this.buttonPush.Click += new System.EventHandler(this.buttonPush_Click);
             // 
-            // topValue
+            // buttonSearch
             // 
-            this.topValue.AutoSize = true;
-            this.topValue.Location = new System.Drawing.Point(48, 20);
-            this.topValue.Name = "topValue";
-            this.topValue.Size = new System.Drawing.Size(0, 13);
-            this.topValue.TabIndex = 1;
+            this.buttonSearch.Location = new System.Drawing.Point(64, 23);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(58, 62);
+            this.buttonSearch.TabIndex = 6;
+            this.buttonSearch.Text = "Search";
+            this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
-            // labelTop
+            // radioButtonAddAtEndLinkedList
             // 
-            this.labelTop.AutoSize = true;
-            this.labelTop.Location = new System.Drawing.Point(7, 20);
-            this.labelTop.Name = "labelTop";
-            this.labelTop.Size = new System.Drawing.Size(32, 13);
-            this.labelTop.TabIndex = 0;
-            this.labelTop.Text = "Top :";
+            this.radioButtonAddAtEndLinkedList.AutoSize = true;
+            this.radioButtonAddAtEndLinkedList.Location = new System.Drawing.Point(134, 106);
+            this.radioButtonAddAtEndLinkedList.Name = "radioButtonAddAtEndLinkedList";
+            this.radioButtonAddAtEndLinkedList.Size = new System.Drawing.Size(44, 17);
+            this.radioButtonAddAtEndLinkedList.TabIndex = 4;
+            this.radioButtonAddAtEndLinkedList.Text = "End";
+            this.radioButtonAddAtEndLinkedList.UseVisualStyleBackColor = true;
+            this.radioButtonAddAtEndLinkedList.CheckedChanged += new System.EventHandler(this.radioButtonAddAtEndLinkedList_CheckedChanged);
+            // 
+            // radioButtonAddAtMiddleLinkedList
+            // 
+            this.radioButtonAddAtMiddleLinkedList.AutoSize = true;
+            this.radioButtonAddAtMiddleLinkedList.Location = new System.Drawing.Point(72, 106);
+            this.radioButtonAddAtMiddleLinkedList.Name = "radioButtonAddAtMiddleLinkedList";
+            this.radioButtonAddAtMiddleLinkedList.Size = new System.Drawing.Size(56, 17);
+            this.radioButtonAddAtMiddleLinkedList.TabIndex = 3;
+            this.radioButtonAddAtMiddleLinkedList.Text = "Middle";
+            this.radioButtonAddAtMiddleLinkedList.UseVisualStyleBackColor = true;
+            this.radioButtonAddAtMiddleLinkedList.CheckedChanged += new System.EventHandler(this.radioButtonAddAtMiddleLinkedList_CheckedChanged);
+            // 
+            // radioButtonAddAtStartLinkedList
+            // 
+            this.radioButtonAddAtStartLinkedList.AutoSize = true;
+            this.radioButtonAddAtStartLinkedList.Checked = true;
+            this.radioButtonAddAtStartLinkedList.Location = new System.Drawing.Point(19, 106);
+            this.radioButtonAddAtStartLinkedList.Name = "radioButtonAddAtStartLinkedList";
+            this.radioButtonAddAtStartLinkedList.Size = new System.Drawing.Size(47, 17);
+            this.radioButtonAddAtStartLinkedList.TabIndex = 2;
+            this.radioButtonAddAtStartLinkedList.TabStop = true;
+            this.radioButtonAddAtStartLinkedList.Text = "Start";
+            this.radioButtonAddAtStartLinkedList.UseVisualStyleBackColor = true;
+            this.radioButtonAddAtStartLinkedList.CheckedChanged += new System.EventHandler(this.radioButtonAddAtStartLinkedList_CheckedChanged);
+            // 
+            // buttonRemove
+            // 
+            this.buttonRemove.Location = new System.Drawing.Point(122, 23);
+            this.buttonRemove.Name = "buttonRemove";
+            this.buttonRemove.Size = new System.Drawing.Size(58, 62);
+            this.buttonRemove.TabIndex = 1;
+            this.buttonRemove.Text = "Remove";
+            this.buttonRemove.UseVisualStyleBackColor = true;
+            this.buttonRemove.Click += new System.EventHandler(this.buttonRemove_Click);
+            // 
+            // buttonAdd
+            // 
+            this.buttonAdd.Location = new System.Drawing.Point(6, 23);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(58, 62);
+            this.buttonAdd.TabIndex = 1;
+            this.buttonAdd.Text = "Add";
+            this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // groupBoxDataStructure
             // 
@@ -409,7 +386,7 @@
             this.groupBoxDataStructure.Controls.Add(this.radioButtonStack);
             this.groupBoxDataStructure.Location = new System.Drawing.Point(6, 6);
             this.groupBoxDataStructure.Name = "groupBoxDataStructure";
-            this.groupBoxDataStructure.Size = new System.Drawing.Size(193, 90);
+            this.groupBoxDataStructure.Size = new System.Drawing.Size(136, 90);
             this.groupBoxDataStructure.TabIndex = 0;
             this.groupBoxDataStructure.TabStop = false;
             this.groupBoxDataStructure.Text = "Data Structure";
@@ -467,8 +444,8 @@
             this.splitContainer.Panel2.BackColor = System.Drawing.Color.GhostWhite;
             this.splitContainer.Panel2.Controls.Add(this.groupBoxInformation);
             this.splitContainer.Panel2.Controls.Add(this.labelOnlyInteger);
-            this.splitContainer.Size = new System.Drawing.Size(375, 437);
-            this.splitContainer.SplitterDistance = 306;
+            this.splitContainer.Size = new System.Drawing.Size(373, 387);
+            this.splitContainer.SplitterDistance = 284;
             this.splitContainer.TabIndex = 0;
             // 
             // tabControlDsSimulator
@@ -479,7 +456,7 @@
             this.tabControlDsSimulator.Location = new System.Drawing.Point(0, 0);
             this.tabControlDsSimulator.Name = "tabControlDsSimulator";
             this.tabControlDsSimulator.SelectedIndex = 0;
-            this.tabControlDsSimulator.Size = new System.Drawing.Size(375, 306);
+            this.tabControlDsSimulator.Size = new System.Drawing.Size(373, 284);
             this.tabControlDsSimulator.TabIndex = 2;
             // 
             // tabPageSimulation
@@ -491,7 +468,7 @@
             this.tabPageSimulation.Location = new System.Drawing.Point(4, 22);
             this.tabPageSimulation.Name = "tabPageSimulation";
             this.tabPageSimulation.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSimulation.Size = new System.Drawing.Size(367, 280);
+            this.tabPageSimulation.Size = new System.Drawing.Size(365, 258);
             this.tabPageSimulation.TabIndex = 0;
             this.tabPageSimulation.Text = "Simulation";
             this.tabPageSimulation.ToolTipText = "View The Graphics Representaion Of The Selected Data Structure ";
@@ -502,19 +479,19 @@
             // hScrollBarSimulator
             // 
             this.hScrollBarSimulator.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.hScrollBarSimulator.Location = new System.Drawing.Point(3, 260);
+            this.hScrollBarSimulator.Location = new System.Drawing.Point(3, 238);
             this.hScrollBarSimulator.Maximum = 10000;
             this.hScrollBarSimulator.Name = "hScrollBarSimulator";
-            this.hScrollBarSimulator.Size = new System.Drawing.Size(344, 17);
+            this.hScrollBarSimulator.Size = new System.Drawing.Size(342, 17);
             this.hScrollBarSimulator.TabIndex = 1;
             // 
             // vScrollBarSimulator
             // 
             this.vScrollBarSimulator.Dock = System.Windows.Forms.DockStyle.Right;
-            this.vScrollBarSimulator.Location = new System.Drawing.Point(347, 3);
+            this.vScrollBarSimulator.Location = new System.Drawing.Point(345, 3);
             this.vScrollBarSimulator.Maximum = 10000;
             this.vScrollBarSimulator.Name = "vScrollBarSimulator";
-            this.vScrollBarSimulator.Size = new System.Drawing.Size(17, 274);
+            this.vScrollBarSimulator.Size = new System.Drawing.Size(17, 252);
             this.vScrollBarSimulator.TabIndex = 0;
             this.vScrollBarSimulator.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBarSimulator_Scroll);
             // 
@@ -523,7 +500,7 @@
             this.tabPageCodeView.Location = new System.Drawing.Point(4, 22);
             this.tabPageCodeView.Name = "tabPageCodeView";
             this.tabPageCodeView.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCodeView.Size = new System.Drawing.Size(367, 280);
+            this.tabPageCodeView.Size = new System.Drawing.Size(365, 258);
             this.tabPageCodeView.TabIndex = 1;
             this.tabPageCodeView.Text = "Code";
             this.tabPageCodeView.ToolTipText = "view the code of data structure selected";
@@ -541,7 +518,7 @@
             this.groupBoxInformation.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxInformation.Location = new System.Drawing.Point(0, 0);
             this.groupBoxInformation.Name = "groupBoxInformation";
-            this.groupBoxInformation.Size = new System.Drawing.Size(375, 127);
+            this.groupBoxInformation.Size = new System.Drawing.Size(373, 99);
             this.groupBoxInformation.TabIndex = 14;
             this.groupBoxInformation.TabStop = false;
             this.groupBoxInformation.Text = "Information";
@@ -636,13 +613,15 @@
             // 
             // dataStructureSimulator
             // 
-            this.ClientSize = new System.Drawing.Size(584, 461);
+            this.ClientSize = new System.Drawing.Size(584, 411);
             this.Controls.Add(this.splitContainer2);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximumSize = new System.Drawing.Size(1366, 768);
             this.Name = "dataStructureSimulator";
+            this.MaximumSizeChanged += new System.EventHandler(this.dataStructureSimulator_MaximumSizeChanged);
+            this.MinimumSizeChanged += new System.EventHandler(this.dataStructureSimulator_MinimumSizeChanged);
             this.Load += new System.EventHandler(this.dataStructureSimulator_Load);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
@@ -651,11 +630,9 @@
             this.groupBoxInput.ResumeLayout(false);
             this.groupBoxInput.PerformLayout();
             this.groupBoxOptionsTree.ResumeLayout(false);
-            this.groupBoxOptionsTree.PerformLayout();
             this.groupBoxOptionsLinkedList.ResumeLayout(false);
             this.groupBoxOptionsLinkedList.PerformLayout();
             this.groupBoxOptionsStack.ResumeLayout(false);
-            this.groupBoxOptionsStack.PerformLayout();
             this.groupBoxDataStructure.ResumeLayout(false);
             this.groupBoxDataStructure.PerformLayout();
             this.splitContainer.Panel1.ResumeLayout(false);
@@ -703,24 +680,20 @@
         private System.Windows.Forms.Label labelAddAt;
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.TextBox textBoxAddAfter;
-        private System.Windows.Forms.RadioButton radioButtonAddAtEnd;
-        private System.Windows.Forms.RadioButton radioButtonAddAtMiddle;
-        private System.Windows.Forms.RadioButton radioButtonAddAtStart;
+        private System.Windows.Forms.RadioButton radioButtonAddAtEndLinkedList;
+        private System.Windows.Forms.RadioButton radioButtonAddAtMiddleLinkedList;
+        private System.Windows.Forms.RadioButton radioButtonAddAtStartLinkedList;
         private System.Windows.Forms.Button buttonRemove;
         private System.Windows.Forms.Button buttonAdd;
         //...........................For Stack.......................................
         private System.Windows.Forms.GroupBox groupBoxOptionsStack;
         private System.Windows.Forms.Button buttonPop;
         private System.Windows.Forms.Button buttonPush;
-        private System.Windows.Forms.Label topValue;
-        private System.Windows.Forms.Label labelTop;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBoxOptionsTree;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonFind;
         private System.Windows.Forms.Button buttonInsert;
-        private System.Windows.Forms.Label labelTreeNodes;
-        private System.Windows.Forms.Label labelNode;
         public System.Windows.Forms.TabPage tabPageSimulation;
         private System.Windows.Forms.Label labelOnlyInteger;
         private System.Windows.Forms.HScrollBar hScrollBarSimulator;
@@ -732,6 +705,8 @@
         private System.Windows.Forms.Label labelLastAction;
         private System.Windows.Forms.Label topLabel;
         private System.Windows.Forms.Label labelTopsValue;
+        private System.Windows.Forms.Timer animationTime;
+        private System.Windows.Forms.Button buttonNewSimulation;
     }
 }
 
