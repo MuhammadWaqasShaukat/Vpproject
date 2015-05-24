@@ -19,23 +19,20 @@ namespace Data_Structure_Simulator
             public int value;
             public node left;
             public node right;
-            public int level;
+            public int depth;
             public int x_axis;
             public int y_axis;
             public int startLineX, startLineY, endLineX, endLineY;
 
             //............................Constructor For Tree ............................//
-            public node(int value, int x_axis, int y_axis, int startLineX, int startLineY, int endLineX, int endLineY)
+            public node(int value, int x_axis, int y_axis, int depth)
             {
                 this.value = value;
                 left = null;
                 right = null;
                 this.x_axis = x_axis;
                 this.y_axis = y_axis;
-                this.startLineX = startLineX;
-                this.startLineY = startLineY;
-                this.endLineX = endLineX;
-                this.endLineY = endLineY;
+                this.depth = depth;
             }
             //..........................Constructor For Stack.............................//
             public node(int value, int x_axis,int y_axis)
@@ -56,6 +53,7 @@ namespace Data_Structure_Simulator
         }
         //....................................Vaiables Used............................................................//
         node top = null;
+        int depth;
         public int width;
         public int height;
         public int x_axisShape;
@@ -68,6 +66,7 @@ namespace Data_Structure_Simulator
         Font msgFont = new Font("Arial", 15);
         Pen searchPen = new Pen(Brushes.Red, 4);
         int count=0;
+        int offset=0, tempOffset = 0;
         //..........................................About Form.........................................................//
         public dataStructureSimulator()
         {
@@ -611,11 +610,9 @@ namespace Data_Structure_Simulator
                 {
                     x_axisShape = canvas.Width / 2;
                     y_axisShape = 0;
-                    initialX = 0;
-                    initialY = 0;
-                    finalX = 0;
-                    finalY = 0;
-                    node newNode = new node(number, x_axisShape, y_axisShape, initialX, initialY, finalX, finalY);
+                    depth = 0;
+                    offset = x_axisShape + 50;
+                    node newNode = new node(number, x_axisShape, y_axisShape,depth);//, initialX, initialY, finalX, finalY);
                     DrawShape(number, x_axisShape, y_axisShape);
                     topLabel.Text = newNode.value.ToString();
                     top = newNode;
@@ -623,6 +620,7 @@ namespace Data_Structure_Simulator
                 else
                 {
                     node currentNode = top;
+                    node previousNode=null;
                     bool added = false;
                     do
                     {
@@ -632,18 +630,21 @@ namespace Data_Structure_Simulator
                             {
                                 x_axisShape = currentNode.x_axis - 50;
                                 y_axisShape = currentNode.y_axis + 50;
-                                initialX = currentNode.x_axis + 2;
-                                initialY = currentNode.y_axis + 20;
-                                finalX = x_axisShape + 20;
-                                finalY = y_axisShape + 5;
-                                node newNode = new node(number, x_axisShape, y_axisShape, initialX, initialY, finalX, finalY);
-                                DrawEdge(initialX, initialY, finalX, finalY);
+                                depth = currentNode.depth + 1;
+                                tempOffset=x_axisShape;
+                                if(offset==tempOffset)
+                                {
+                                    updatePosition();
+                                }
+                                node newNode = new node(number, x_axisShape, y_axisShape,depth);
+                                updateEdges(currentNode,newNode);
                                 DrawShape(number, x_axisShape, y_axisShape);
                                 currentNode.left = newNode;
-                                added = true;
+                                added = true;                                
                             }
                             else
                             {
+                                previousNode = currentNode;
                                 currentNode = currentNode.left;
                             }
                         }
@@ -653,18 +654,16 @@ namespace Data_Structure_Simulator
                             {
                                 x_axisShape = currentNode.x_axis + 50;
                                 y_axisShape = currentNode.y_axis + 50;
-                                initialX = currentNode.x_axis + 20;
-                                initialY = currentNode.y_axis + 20;
-                                finalX = x_axisShape + 5;
-                                finalY = y_axisShape + 5;
-                                node newNode = new node(number, x_axisShape, y_axisShape, initialX, initialY, finalX, finalY);
-                                DrawEdge(initialX, initialY, finalX, finalY);
+                                
+                                node newNode = new node(number, x_axisShape, y_axisShape);
+                                updateEdges(currentNode,newNode);
                                 DrawShape(number, x_axisShape, y_axisShape);
                                 currentNode.right = newNode;
                                 added = true;
                             }
                             else
                             {
+                                previousNode = currentNode;
                                 currentNode = currentNode.right;
                             }
                         }
@@ -680,9 +679,65 @@ namespace Data_Structure_Simulator
             }
             finally
             {
+               // updatePosition();
                 textBoxForInput.Clear();
             }
         }
+        void updateEdges(node first,node second)
+        {
+            if (second.value < first.value)
+            {
+                  initialX = first.x_axis;
+                  initialY = first.y_axis + 30;
+                  finalX = second.x_axis + 30;
+                  finalY = second.y_axis -1;            
+            }
+            else if(second.value >= first.value)
+            {
+                initialX = first.x_axis + 50;
+                initialY = first.y_axis + 30;
+                finalX = second.x_axis+20;
+                finalY = second.y_axis-1;
+            }
+            DrawEdge(initialX, initialY, finalX, finalY);
+        }
+        //.....................................updating Nodes........................................................//
+        void updatePosition()
+        {
+            bool left = false;
+            node current = top;
+            if(current.left==null || current.right==null)
+            {
+                return;
+            }
+            if (current != null)
+            {
+                reOderringNodes(current, current.left);
+                reOderringNodes(current, current.right);
+                if(!left)
+                {
+                    current=current.left;
+                    left=false;
+                }
+                if (left)
+                {
+                    current = current.right;
+                    left = true;
+                }
+            }
+        }
+        //......................................Tree Updations,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,...//
+    void reOderringNodes(node first, node second)
+    {
+        if(first.value>second.value)
+        {
+            second.x_axis -= 50;
+        }
+        if(first.value<second.value)
+        {
+            second.x_axis += 50;
+        }
+    }
         //....................................................Find.....................................................//
         private void buttonFind_Click(object sender, EventArgs e)
         {
@@ -827,8 +882,8 @@ private node DeleteN(node root,int key)
             try
             {
                 graphics = canvas.CreateGraphics();
-                graphics.DrawString(num.ToString(), font, brush, x + 5, y + 4);
-                graphics.DrawEllipse(pen, x, y, 26, 26);
+                graphics.DrawString(num.ToString(), font, brush, x + 13, y + 15);
+                graphics.DrawEllipse(pen, x, y, 50, 50);
             }
             catch
             {
@@ -851,7 +906,7 @@ private node DeleteN(node root,int key)
         }
         private void repaintTree(ref node root)
         {
-            
+
             if (root != null)
             {
                 DrawEdge(root.startLineX, root.startLineY, root.endLineX, root.endLineY);
@@ -860,7 +915,12 @@ private node DeleteN(node root,int key)
                 repaintTree(ref root.right);
             }
             else return;
+        }
 
+        private void vScrollBar_Scroll(object sender, ScrollEventArgs e)
+        {
+            canvas.Height++;
+           // vScrollBar.Value--;
         }       
     }
 

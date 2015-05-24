@@ -476,12 +476,14 @@
             // vScrollBar
             // 
             this.vScrollBar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.vScrollBar.LargeChange = 3500;
+            this.vScrollBar.LargeChange = 900;
             this.vScrollBar.Location = new System.Drawing.Point(554, 0);
-            this.vScrollBar.Maximum = 4000;
+            this.vScrollBar.Maximum = 1000;
             this.vScrollBar.Name = "vScrollBar";
             this.vScrollBar.Size = new System.Drawing.Size(17, 350);
             this.vScrollBar.TabIndex = 2;
+            this.vScrollBar.Tag = "canvas";
+            this.vScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar_Scroll);
             // 
             // hScrollBar
             // 
@@ -492,6 +494,7 @@
             this.hScrollBar.Name = "hScrollBar";
             this.hScrollBar.Size = new System.Drawing.Size(571, 17);
             this.hScrollBar.TabIndex = 1;
+            this.hScrollBar.Tag = "canvas";
             // 
             // canvas
             // 
@@ -499,8 +502,10 @@
             this.canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.canvas.Location = new System.Drawing.Point(0, 0);
+            this.canvas.MaximumSize = new System.Drawing.Size(1000, 1000);
             this.canvas.Name = "canvas";
             this.canvas.Size = new System.Drawing.Size(571, 367);
+            this.canvas.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.canvas.TabIndex = 0;
             this.canvas.TabStop = false;
             // 
@@ -619,6 +624,7 @@
             this.groupBoxDataStructure.ResumeLayout(false);
             this.groupBoxDataStructure.PerformLayout();
             this.splitContainer.Panel1.ResumeLayout(false);
+            this.splitContainer.Panel1.PerformLayout();
             this.splitContainer.Panel2.ResumeLayout(false);
             this.splitContainer.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
