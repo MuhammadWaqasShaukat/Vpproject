@@ -19,19 +19,21 @@ namespace Data_Structure_Simulator
             public int value;
             public node left;
             public node right;
-            public int depth;
+            public node parent;
             public int x_axis;
             public int y_axis;
             public int startLineX, startLineY, endLineX, endLineY;
-
+            public int depth;
+            public int height;            
             //............................Constructor For Tree ............................//
-            public node(int value, int x_axis, int y_axis, int depth)
+            public node(int value, int x_axis, int y_axis, node parent,int depth)
             {
                 this.value = value;
                 left = null;
                 right = null;
                 this.x_axis = x_axis;
                 this.y_axis = y_axis;
+                this.parent = parent;
                 this.depth = depth;
             }
             //..........................Constructor For Stack.............................//
@@ -53,7 +55,7 @@ namespace Data_Structure_Simulator
         }
         //....................................Vaiables Used............................................................//
         node top = null;
-        int depth;
+        List<node> nodes = new List<node>();
         public int width;
         public int height;
         public int x_axisShape;
@@ -66,7 +68,9 @@ namespace Data_Structure_Simulator
         Font msgFont = new Font("Arial", 15);
         Pen searchPen = new Pen(Brushes.Red, 4);
         int count=0;
-        int offset=0, tempOffset = 0;
+        int leftOffset, rightOffset;
+        int depth, maxDepth;
+        int? heightTree=null;
         //..........................................About Form.........................................................//
         public dataStructureSimulator()
         {
@@ -83,10 +87,10 @@ namespace Data_Structure_Simulator
             if (radioButtonLinkedList.Checked == true)
                 repaintLinkedList();
         }
-        private void canvas_Paint(object sender, PaintEventArgs e)
-        {
-        }
-        //......................................radio Buttons..........................................................//
+        //private void canvas_Paint(object sender, PaintEventArgs e)
+        //{
+        //}
+        ////......................................radio Buttons..........................................................//
         private void radioButtonStack_CheckedChanged(object sender, EventArgs e)
         {
             dataStructureUsed.Text = radioButtonStack.Text.ToString();
@@ -99,7 +103,7 @@ namespace Data_Structure_Simulator
         }
         private void radioButtonLinkedList_CheckedChanged(object sender, EventArgs e)
         {
-
+             
             dataStructureUsed.Text = radioButtonLinkedList.Text.ToString();
             labelHowItWorks.Text = "1 :- You can Insert the data into Linked List anywhere you want at  Start , Middle , End .\n2 :- You can Delete the data from Linked List anywhere you want at  Start , Middle , End '.\n3 :- Before inserting or deleting the data you have to select Between  Start , Middle  or  End buttons.\n4 :- Searching can be performed in whole List.\n5 :- While adding in Middle of the list you have to provide the input in this way \n       [the number after you want to Enter, new number which would be add]\n      like this num1,num2 number must be seprated by coma symbol(,) ".ToString();
             groupBoxOperationsStack.Enabled = false;
@@ -246,7 +250,11 @@ namespace Data_Structure_Simulator
         //.........................................Graphics Stack......................................................//
         public void drawStack(ref node current)
         {
+            
             graphics = canvas.CreateGraphics();
+            Rectangle rect = new Rectangle(0, 0, 2500, 1500);
+            Region region = new Region(rect);
+            graphics.SetClip(rect);
             graphics.DrawString(current.value.ToString(), font, brush, current.x_axis+30, current.y_axis+20);
             graphics.DrawRectangle(pen, current.x_axis, current.y_axis, 100, 50);
         }
@@ -600,8 +608,7 @@ namespace Data_Structure_Simulator
         //................................................Tree Options.................................................//
         //....................................................Insert...................................................//
         private void buttonInsert_Click(object sender, EventArgs e)
-        {
-            try
+        {            try
             { 
                 node N;
                 N = top;
@@ -610,12 +617,15 @@ namespace Data_Structure_Simulator
                 {
                     x_axisShape = canvas.Width / 2;
                     y_axisShape = 0;
+                    //leftOffset = x_axisShape;
+                    //rightOffset = leftOffset + 50;
                     depth = 0;
-                    offset = x_axisShape + 50;
-                    node newNode = new node(number, x_axisShape, y_axisShape,depth);//, initialX, initialY, finalX, finalY);
+                    //maxDepth = 1;
+                    node newNode = new node(number, x_axisShape, y_axisShape,null, depth);//, initialX, initialY, finalX, finalY);
                     DrawShape(number, x_axisShape, y_axisShape);
                     topLabel.Text = newNode.value.ToString();
                     top = newNode;
+                    nodes.Add(newNode);
                 }
                 else
                 {
@@ -628,18 +638,21 @@ namespace Data_Structure_Simulator
                         {
                             if (currentNode.left == null)
                             {
-                                x_axisShape = currentNode.x_axis - 50;
-                                y_axisShape = currentNode.y_axis + 50;
-                                depth = currentNode.depth + 1;
-                                tempOffset=x_axisShape;
-                                if(offset==tempOffset)
-                                {
-                                    updatePosition();
-                                }
-                                node newNode = new node(number, x_axisShape, y_axisShape,depth);
+
+                                //depth=currentNode.depth+1;
+                                //if(currentNode.depth>maxDepth)
+                                //{
+                                //    maxDepth = currentNode.depth;
+                                //    upDateTree(nodes,maxDepth);                                    
+                                //}
+                                leftOffset = currentNode.x_axis-50;
+                                x_axisShape = leftOffset;
+                                y_axisShape = currentNode.y_axis + 60;
+                                node newNode = new node(number, x_axisShape, y_axisShape,currentNode, depth);
                                 updateEdges(currentNode,newNode);
                                 DrawShape(number, x_axisShape, y_axisShape);
                                 currentNode.left = newNode;
+                                nodes.Add(newNode);
                                 added = true;                                
                             }
                             else
@@ -652,18 +665,24 @@ namespace Data_Structure_Simulator
                         {
                             if (currentNode.right == null)
                             {
-                                x_axisShape = currentNode.x_axis + 50;
-                                y_axisShape = currentNode.y_axis + 50;
-                                
-                                node newNode = new node(number, x_axisShape, y_axisShape);
+                               depth=currentNode.depth+1;
+                                if (currentNode.depth > maxDepth)
+                                {
+                                    maxDepth = currentNode.depth;
+                                    upDateTree(nodes, maxDepth);
+                                }
+                                rightOffset=currentNode.x_axis+50;
+                                x_axisShape = rightOffset;
+                                y_axisShape = currentNode.y_axis + 60;   
+                                node newNode = new node(number, x_axisShape, y_axisShape, currentNode,depth);
                                 updateEdges(currentNode,newNode);
                                 DrawShape(number, x_axisShape, y_axisShape);
                                 currentNode.right = newNode;
+                                nodes.Add(newNode);
                                 added = true;
                             }
                             else
                             {
-                                previousNode = currentNode;
                                 currentNode = currentNode.right;
                             }
                         }
@@ -683,8 +702,62 @@ namespace Data_Structure_Simulator
                 textBoxForInput.Clear();
             }
         }
+        int i = 5;
+        void upDateTree(List<node> currentList, int maxDepth)
+        { 
+            int depth=1;
+            int k = 0;
+            int v=0;
+            int x=currentList[0].x_axis,x2;
+            int value = currentList[k].value;
+            for(int i=maxDepth;i>0;i--)
+            {                
+                for(int j=0;j<currentList.Count;j++)
+                {
+                    if(currentList[j].depth==depth)
+                    {
+                        if(currentList[j].value>=value)
+                        {
+                            x2 = x + (i * 50);
+                            currentList[j].x_axis = x2;}
+                        else
+
+                        {
+                            x2 = x - (i * 50);
+                            currentList[j].x_axis = x2;
+                        }
+                   }
+                }
+                while (v < currentList.Count)
+                {
+                    if (currentList[v].depth != depth)
+                    {
+                        value = currentList[++k].value;
+                        break;
+                    }
+                    v++;
+                }
+                depth++;                
+            }
+            //while (current!= null)
+            //{
+            //    if (current.left != null)
+            //    {
+            //        current.left.x_axis-=  i;   
+            //    }
+            //    if (current.right != null)
+            //    {
+            //        current.right.x_axis += i;
+            //    }
+            //    current = current.parent;
+            //    i += 5;
+            //    upDateTree(current);
+            //}
+            //i = 5;
+        }
         void updateEdges(node first,node second)
         {
+            if (second == null) return;
             if (second.value < first.value)
             {
                   initialX = first.x_axis;
@@ -906,9 +979,10 @@ private node DeleteN(node root,int key)
         }
         private void repaintTree(ref node root)
         {
-
+           
             if (root != null)
             {
+
                 DrawEdge(root.startLineX, root.startLineY, root.endLineX, root.endLineY);
                 DrawShape(root.value, root.x_axis, root.y_axis);
                 repaintTree(ref root.left);
@@ -917,11 +991,11 @@ private node DeleteN(node root,int key)
             else return;
         }
 
-        private void vScrollBar_Scroll(object sender, ScrollEventArgs e)
+        private void comboBoxSettingHeight_SelectedIndexChanged(object sender, EventArgs e)
         {
-            canvas.Height++;
-           // vScrollBar.Value--;
-        }       
+            heightTree = comboBoxSettingHeight.SelectedIndex;
+        }
+
     }
 
 }

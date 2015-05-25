@@ -61,19 +61,16 @@
             this.radioButtonLinkedList = new System.Windows.Forms.RadioButton();
             this.radioButtonStack = new System.Windows.Forms.RadioButton();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.vScrollBar = new System.Windows.Forms.VScrollBar();
-            this.hScrollBar = new System.Windows.Forms.HScrollBar();
-            this.canvas = new System.Windows.Forms.PictureBox();
+            this.canvas = new System.Windows.Forms.Panel();
             this.groupBoxInformation = new System.Windows.Forms.GroupBox();
+            this.userGuidePanel = new System.Windows.Forms.Panel();
             this.labelHowItWorks = new System.Windows.Forms.Label();
             this.labelOnlyInteger = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.dataStructureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.labelHeightTree = new System.Windows.Forms.Label();
+            this.comboBoxSettingHeight = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -87,10 +84,9 @@
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
             this.groupBoxInformation.SuspendLayout();
+            this.userGuidePanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer2
@@ -105,8 +101,8 @@
             // 
             this.splitContainer2.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.splitContainer2.Panel1.Controls.Add(this.groupBoxInput);
-            this.splitContainer2.Panel1.Controls.Add(this.groupBoxOperationsStack);
             this.splitContainer2.Panel1.Controls.Add(this.groupBoxOperationsTree);
+            this.splitContainer2.Panel1.Controls.Add(this.groupBoxOperationsStack);
             this.splitContainer2.Panel1.Controls.Add(this.groupBoxOperationsLinkedList);
             this.splitContainer2.Panel1.Controls.Add(this.groupBoxDataStructure);
             this.splitContainer2.Panel1.Margin = new System.Windows.Forms.Padding(400, 0, 400, 0);
@@ -268,13 +264,15 @@
             // 
             this.groupBoxOperationsTree.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxOperationsTree.Controls.Add(this.comboBoxSettingHeight);
+            this.groupBoxOperationsTree.Controls.Add(this.labelHeightTree);
             this.groupBoxOperationsTree.Controls.Add(this.buttonDelete);
             this.groupBoxOperationsTree.Controls.Add(this.buttonFind);
             this.groupBoxOperationsTree.Controls.Add(this.buttonInsert);
             this.groupBoxOperationsTree.Enabled = false;
-            this.groupBoxOperationsTree.Location = new System.Drawing.Point(6, 434);
+            this.groupBoxOperationsTree.Location = new System.Drawing.Point(6, 273);
             this.groupBoxOperationsTree.Name = "groupBoxOperationsTree";
-            this.groupBoxOperationsTree.Size = new System.Drawing.Size(195, 76);
+            this.groupBoxOperationsTree.Size = new System.Drawing.Size(195, 97);
             this.groupBoxOperationsTree.TabIndex = 0;
             this.groupBoxOperationsTree.TabStop = false;
             this.groupBoxOperationsTree.Text = "Tree Operations";
@@ -321,7 +319,7 @@
             this.groupBoxOperationsLinkedList.Controls.Add(this.radioButtonAddAtStartLinkedList);
             this.groupBoxOperationsLinkedList.Controls.Add(this.buttonAdd);
             this.groupBoxOperationsLinkedList.Enabled = false;
-            this.groupBoxOperationsLinkedList.Location = new System.Drawing.Point(6, 273);
+            this.groupBoxOperationsLinkedList.Location = new System.Drawing.Point(8, 376);
             this.groupBoxOperationsLinkedList.Name = "groupBoxOperationsLinkedList";
             this.groupBoxOperationsLinkedList.Size = new System.Drawing.Size(195, 155);
             this.groupBoxOperationsLinkedList.TabIndex = 4;
@@ -460,8 +458,6 @@
             // splitContainer.Panel1
             // 
             this.splitContainer.Panel1.BackColor = System.Drawing.SystemColors.Window;
-            this.splitContainer.Panel1.Controls.Add(this.vScrollBar);
-            this.splitContainer.Panel1.Controls.Add(this.hScrollBar);
             this.splitContainer.Panel1.Controls.Add(this.canvas);
             // 
             // splitContainer.Panel2
@@ -473,46 +469,23 @@
             this.splitContainer.SplitterDistance = 367;
             this.splitContainer.TabIndex = 0;
             // 
-            // vScrollBar
-            // 
-            this.vScrollBar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.vScrollBar.LargeChange = 900;
-            this.vScrollBar.Location = new System.Drawing.Point(554, 0);
-            this.vScrollBar.Maximum = 1000;
-            this.vScrollBar.Name = "vScrollBar";
-            this.vScrollBar.Size = new System.Drawing.Size(17, 350);
-            this.vScrollBar.TabIndex = 2;
-            this.vScrollBar.Tag = "canvas";
-            this.vScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar_Scroll);
-            // 
-            // hScrollBar
-            // 
-            this.hScrollBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.hScrollBar.LargeChange = 3500;
-            this.hScrollBar.Location = new System.Drawing.Point(0, 350);
-            this.hScrollBar.Maximum = 4000;
-            this.hScrollBar.Name = "hScrollBar";
-            this.hScrollBar.Size = new System.Drawing.Size(571, 17);
-            this.hScrollBar.TabIndex = 1;
-            this.hScrollBar.Tag = "canvas";
-            // 
             // canvas
             // 
-            this.canvas.BackColor = System.Drawing.Color.White;
-            this.canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.canvas.AutoScroll = true;
+            this.canvas.AutoScrollMargin = new System.Drawing.Size(2500, 1500);
+            this.canvas.AutoScrollMinSize = new System.Drawing.Size(2500, 1500);
+            this.canvas.AutoSize = true;
+            this.canvas.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.canvas.Location = new System.Drawing.Point(0, 0);
-            this.canvas.MaximumSize = new System.Drawing.Size(1000, 1000);
             this.canvas.Name = "canvas";
             this.canvas.Size = new System.Drawing.Size(571, 367);
-            this.canvas.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.canvas.TabIndex = 0;
-            this.canvas.TabStop = false;
             // 
             // groupBoxInformation
             // 
             this.groupBoxInformation.BackColor = System.Drawing.Color.AliceBlue;
-            this.groupBoxInformation.Controls.Add(this.labelHowItWorks);
+            this.groupBoxInformation.Controls.Add(this.userGuidePanel);
             this.groupBoxInformation.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxInformation.Location = new System.Drawing.Point(0, 0);
             this.groupBoxInformation.Name = "groupBoxInformation";
@@ -521,11 +494,22 @@
             this.groupBoxInformation.TabStop = false;
             this.groupBoxInformation.Text = "User Guide (How It Works)";
             // 
+            // userGuidePanel
+            // 
+            this.userGuidePanel.AutoScroll = true;
+            this.userGuidePanel.AutoScrollMargin = new System.Drawing.Size(500, 500);
+            this.userGuidePanel.Controls.Add(this.labelHowItWorks);
+            this.userGuidePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userGuidePanel.Location = new System.Drawing.Point(3, 16);
+            this.userGuidePanel.Name = "userGuidePanel";
+            this.userGuidePanel.Size = new System.Drawing.Size(565, 147);
+            this.userGuidePanel.TabIndex = 0;
+            // 
             // labelHowItWorks
             // 
             this.labelHowItWorks.AutoSize = true;
             this.labelHowItWorks.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelHowItWorks.Location = new System.Drawing.Point(18, 21);
+            this.labelHowItWorks.Location = new System.Drawing.Point(15, 7);
             this.labelHowItWorks.Name = "labelHowItWorks";
             this.labelHowItWorks.Size = new System.Drawing.Size(0, 15);
             this.labelHowItWorks.TabIndex = 6;
@@ -566,38 +550,39 @@
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click_1);
             // 
-            // statusStrip1
+            // labelHeightTree
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripProgressBar1,
-            this.toolStripStatusLabel1,
-            this.toolStripStatusLabel2});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 539);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(784, 22);
-            this.statusStrip1.Stretch = false;
-            this.statusStrip1.TabIndex = 4;
-            this.statusStrip1.Text = "statusStrip1";
+            this.labelHeightTree.AutoSize = true;
+            this.labelHeightTree.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelHeightTree.Location = new System.Drawing.Point(9, 72);
+            this.labelHeightTree.Name = "labelHeightTree";
+            this.labelHeightTree.Size = new System.Drawing.Size(119, 15);
+            this.labelHeightTree.TabIndex = 7;
+            this.labelHeightTree.Text = "Set Height For Tree :";
             // 
-            // toolStripProgressBar1
+            // comboBoxSettingHeight
             // 
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
-            // 
-            // toolStripStatusLabel2
-            // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(0, 17);
+            this.comboBoxSettingHeight.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.comboBoxSettingHeight.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSettingHeight.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"});
+            this.comboBoxSettingHeight.Location = new System.Drawing.Point(124, 72);
+            this.comboBoxSettingHeight.Name = "comboBoxSettingHeight";
+            this.comboBoxSettingHeight.Size = new System.Drawing.Size(60, 21);
+            this.comboBoxSettingHeight.TabIndex = 0;
+            this.comboBoxSettingHeight.SelectedIndexChanged += new System.EventHandler(this.comboBoxSettingHeight_SelectedIndexChanged);
             // 
             // dataStructureSimulator
             // 
             this.ClientSize = new System.Drawing.Size(784, 561);
-            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.splitContainer2);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -619,6 +604,7 @@
             this.groupBoxInput.PerformLayout();
             this.groupBoxOperationsStack.ResumeLayout(false);
             this.groupBoxOperationsTree.ResumeLayout(false);
+            this.groupBoxOperationsTree.PerformLayout();
             this.groupBoxOperationsLinkedList.ResumeLayout(false);
             this.groupBoxOperationsLinkedList.PerformLayout();
             this.groupBoxDataStructure.ResumeLayout(false);
@@ -629,13 +615,11 @@
             this.splitContainer.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.canvas)).EndInit();
             this.groupBoxInformation.ResumeLayout(false);
-            this.groupBoxInformation.PerformLayout();
+            this.userGuidePanel.ResumeLayout(false);
+            this.userGuidePanel.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -688,14 +672,11 @@
         private System.Windows.Forms.Label labelLastAction;
         private System.Windows.Forms.Label topLabel;
         private System.Windows.Forms.Label labelTopsValue;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        private System.Windows.Forms.PictureBox canvas;
         private System.Windows.Forms.Label labelHowItWorks;
-        private System.Windows.Forms.VScrollBar vScrollBar;
-        private System.Windows.Forms.HScrollBar hScrollBar;
+        private System.Windows.Forms.Panel canvas;
+        private System.Windows.Forms.Panel userGuidePanel;
+        private System.Windows.Forms.ComboBox comboBoxSettingHeight;
+        private System.Windows.Forms.Label labelHeightTree;
     }
 }
 
